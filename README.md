@@ -49,7 +49,7 @@ Dicas: procurem implementar uma aplicação de apelo social e busquem contatos c
 ## Entrega
 
 - Aceitar o convite do repositório da sprint-9-10-pb-aws-ufu;
-- **O trabalho deve ser feito em dois grupos de cinco e um grupo de seis pessoas, que serão distribuídos em reunião dia 08/08/2023**;
+- **O trabalho deve ser feito em dois grupos de cinco e um grupo de seis pessoas, que serão distribuídos em reunião dia 04/10/2023**;
 - **O tema do trabalho e o esboço da arquitetura deverá ser comunicado até dia 10/10/2023**;
 - Criar uma branch no repositório com o formato grupo-número (Exemplo: grupo-1);
 - **O grupo deverá fazer uma apresentação de protótipo (prova de conceito - PoC) em ensaio preliminar dia 24/10/2023**;
