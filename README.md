@@ -52,12 +52,12 @@ Dicas: procurem implementar uma aplicação de apelo social e busquem contatos c
 - **O trabalho deve ser feito em dois grupos de cinco e um grupo de seis pessoas, que serão distribuídos em reunião dia 08/08/2023**;
 - **O tema do trabalho e o esboço da arquitetura deverá ser comunicado até dia 10/10/2023**;
 - Criar uma branch no repositório com o formato grupo-número (Exemplo: grupo-1);
-- **O grupo deverá fazer uma apresentação de protótipo (prova de conceito - PoC) em ensaio preliminar dia 17/10/2023**;
+- **O grupo deverá fazer uma apresentação de protótipo (prova de conceito - PoC) em ensaio preliminar dia 24/10/2023**;
 - Subir o trabalho na branch com um README.md:
   - documentar detalhes sobre como a avaliação foi desenvolvida
   - dificuldades conhecidas
   - como utilizar o sistema
   - 🔨 código fonte desenvolvido (Sugestão: pasta `src`)
-- **Cada grupo deverá fazer uma apresentação do trabalho completo desenvolvido no dia 24/10/2023**.
-- O prazo de entrega é até às 12h do dia 01/11/2023 no repositório do github ([https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-9-10-pb-aws-furg-ifrs-uffs](https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-9-10-pb-aws-furg-ifrs-uffs)).
+- **Cada grupo deverá fazer uma apresentação do trabalho completo desenvolvido no dia 31/10/2023**.
+- O prazo de entrega é até às 12h do dia 08/11/2023 no repositório do github ([https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-9-10-pb-aws-furg-ifrs-uffs](https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-9-10-pb-aws-furg-ifrs-uffs)).
 
