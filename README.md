@@ -26,6 +26,19 @@ Dicas: procurem implementar uma aplicação de apelo social e busquem contatos c
 
 ***
 
+## Arquitetura do Bot
+
+O bot terá como foco ajudar imigrantes da lingua francesa a se comunicar com a lingua portuguesa. 
+<div align="center">
+  <img src="docImages/finalSprintAWSArch.png" alt="angular-logo">
+  <p> Arquitetura AWS
+  <br>
+  <br>
+  <br>
+  <img src="docImages/finalSprintFluxogram.png" alt="angular-logo">
+  <p> Fluxograma das intents
+</div>
+
 ## O que será avaliado
 
 - Praticidade de utilização
