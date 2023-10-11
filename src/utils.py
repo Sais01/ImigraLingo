@@ -1,11 +1,11 @@
 def prepare_response_text(event, msgText):
   """
-   Prepares a response to be sent to Amazon lex
-   
-   @param event - The event that triggered the close intent
-   @param msgText - The message text to send to Amazon lex
-   
-   @return A dictionary that can be sent to Amazon lex with the close intent and the message text as
+  Prepares a response to be sent to Amazon lex
+  
+  @param event - The event that triggered the close intent
+  @param msgText - The message text to send to Amazon lex
+  
+  @return A dictionary that can be sent to Amazon lex with the close intent and the message text as
   """
   response = {
           "sessionState": {

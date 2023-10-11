@@ -1,7 +1,6 @@
 import os
 
-#Aqui são definidas as variáveis de ambiente que serão utilizadas no projeto
-# class Settings:
-#     BUCKET_NAME = os.environ.get('BUCKET_NAME')
+class Settings:
+    API_KEY_OPENCAGE_GEOCODE = os.getenv("API_KEY_OPENCAGE_GEOCODE")
     
-# settings = Settings()
+settings = Settings()
