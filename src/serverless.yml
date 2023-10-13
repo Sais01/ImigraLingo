@@ -1,0 +1,22 @@
+service: final-lex-bot-v1
+frameworkVersion: '3'
+
+useDotenv: true
+
+provider:
+  name   : aws
+  region : us-east-1 
+  runtime: python3.9
+
+  iam:
+    role:
+      name: lambdaFinalLexBotRole
+      statements:
+        - Effect  : Allow
+          Action  : 
+            - lambda:InvokeFunction
+          Resource: "*"
+
+functions:
+  lexIntentVerifier:
+    handler: handler.handlerLexIntentVerifier

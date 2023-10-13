@@ -134,3 +134,8 @@ package-lock.json
 package.json
 settings.json
 venv
+
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+.terraform
