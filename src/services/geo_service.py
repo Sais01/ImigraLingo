@@ -19,7 +19,7 @@ def cep_to_location(cep):
     response = requests.get(url)
     data = response.json()
     response =f"{data['logradouro']}, {data['localidade']} - {data['uf']}, Brasil"
-    return data
+    return response
   except requests.exceptions.RequestException as e:
     print(f"Error in ViaCEP request: {e}")
     return None
