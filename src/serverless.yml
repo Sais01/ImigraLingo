@@ -7,16 +7,16 @@ provider:
   name   : aws
   region : us-east-1 
   runtime: python3.9
+  environment:
+    API_KEY_OPENCAGE_GEOCODE: ${env:API_KEY_OPENCAGE_GEOCODE}
 
-  iam:
-    role:
-      name: lambdaFinalLexBotRole
-      statements:
-        - Effect  : Allow
-          Action  : 
-            - lambda:InvokeFunction
-          Resource: "*"
 
 functions:
   lexIntentVerifier:
     handler: handler.handlerLexIntentVerifier
+  cep_to_places:
+    handler: controllers/intents/cep_to_places_controller.handle_cep_to_places
+
+plugins:
+  - serverless-offline
+  - serverless-python-requirements
