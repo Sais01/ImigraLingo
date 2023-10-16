@@ -19,4 +19,4 @@ provider:
 
 functions:
   lexIntentVerifier:
-    handler: handler.handlerLexIntentVerifier
+    handler: router_controller.handlerLexIntentVerifier

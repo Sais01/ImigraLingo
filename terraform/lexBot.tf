@@ -57,23 +57,65 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                         ]
                         Slots = [
                             {
-                                Name         = "DadoAluno"
-                                SlotTypeName = "AMAZON.AlphaNumeric"
+                                Name         = "imgFromUser"
+                                SlotTypeName = "AMAZON.FreeFormInput" # Recognizes strings that consist of any words or characters.
                                 ValueElicitationSetting = {
                                     SlotConstraint = "Required"
                                     PromptSpecification = {
-                                        MaxRetries = 2
+                                        MaxRetries = 1
+                                        MessageGroupsList = [{
+                                            Message = {
+                                                PlainTextMessage = {
+                                                    Value = "Por favor, envie a imagem contendo o texto que deseja extrair."
+                                                }
+                                            }
+                                        }]
+                                    },
+                                    SlotCaptureSetting = {
+                                        CodeHook = {
+                                            EnableCodeHookInvocation = true
+                                            IsActive = true
+                                            PostCodeHookSpecification = {
+                                                SuccessResponse = {
+                                                    MessageGroupsList = [{
+                                                        Message = {
+                                                            PlainTextMessage = {
+                                                                Value = "Essa mensagem não é usada."
+                                                            }
+                                                        }
+                                                    }]
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                Name         = "textOrAudioConditional"
+                                SlotTypeName = "AMAZON.AlphaNumeric" # Recognizes words made up of letters and numbers.
+                                ValueElicitationSetting = {
+                                    SlotConstraint = "Required"
+                                    PromptSpecification = {
+                                        MaxRetries = 1
                                         MessageGroupsList = [{
                                             Message = {
                                                 ImageResponseCard = {
-                                                    Title = "Consulta de dados do aluno"
+                                                    Title = "Você deseja receber o texto extraído da imagem ou um áudio com o texto extraído?"
                                                     Buttons = [{
-                                                        "Text": "1",
-                                                        "Value": "1"
+                                                        "Text": "Texto em Francês",
+                                                        "Value": "text_fr"
                                                     },
                                                     {
-                                                        "Text": "2",
-                                                        "Value": "2"
+                                                        "Text": "Áudio em Francês",
+                                                        "Value": "audio_fr"
+                                                    },
+                                                    {
+                                                        "Text": "Texto em Português",
+                                                        "Value": "text_pt"
+                                                    },
+                                                    {
+                                                        "Text": "Áudio em Português",
+                                                        "Value": "audio_pt"
                                                     }]
                                                 }
                                             }
@@ -88,7 +130,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                                     MessageGroupsList = [{
                                                         Message = {
                                                             PlainTextMessage = {
-                                                                Value = "Aguarde enquanto consulto os dados do aluno"
+                                                                Value = "Essa mensagem não é usada."
                                                             }
                                                         }
                                                     }]
@@ -100,17 +142,143 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                             }
                         ]
                         SlotPriorities = [
-                            { Priority = 1, SlotName = "DadoAluno" }
+                            { Priority = 1, SlotName = "imgFromUser" },
+                            { Priority = 2, SlotName = "textOrAudioConditional" }
                         ]
                     },
                     {
                         Name = "TextAudioTranslater"
-                        Description = "recebe um texto ou um áudio do usuário imigrante retorna um texto traduzido para portugues ou áudio do texto traduzido."
+                        Description = "Recebe um texto ou um áudio do usuário imigrante retorna um texto traduzido para portugues ou áudio do texto traduzido."
                         DialogCodeHook = {
                           Enabled = true
                         }
                         SampleUtterances = [
                             { Utterance = "TextAudioTranslater" },
+                        ]
+                        Slots = [
+                            {
+                                Name          = "languageConditional"
+                                SlotTypeName  = "AMAZON.AlphaNumeric" # Recognizes words made up of letters and numbers.
+                                ValueElicitationSetting = {
+                                    SlotConstraint = "Required"
+                                    PromptSpecification = {
+                                        MaxRetries = 1
+                                        MessageGroupsList = [{
+                                            Message = {
+                                                ImageResponseCard = {
+                                                    Title = "Você deseja traduzir um texto ou um áudio do português -> francês ou francês -> português?"
+                                                    Buttons = [{
+                                                        "Text": "Português para o francês",
+                                                        "Value": "ptToFr"
+                                                    },
+                                                    {
+                                                        "Text": "Francês para o português",
+                                                        "Value": "frToPt"
+                                                    }]
+                                                }
+                                            }
+                                        }]
+                                    },
+                                    SlotCaptureSetting = {
+                                        CodeHook = {
+                                            EnableCodeHookInvocation = true
+                                            IsActive = true
+                                            PostCodeHookSpecification = {
+                                                SuccessResponse = {
+                                                    MessageGroupsList = [{
+                                                        Message = {
+                                                            PlainTextMessage = {
+                                                                Value = "Essa mensagem não é usada."
+                                                            }
+                                                        }
+                                                    }]
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                Name         = "textOrAudioReceiver"
+                                SlotTypeName = "AMAZON.AlphaNumeric" # Recognizes words made up of letters and numbers.
+                                ValueElicitationSetting = {
+                                    SlotConstraint = "Required"
+                                    PromptSpecification = {
+                                        MaxRetries = 1
+                                        MessageGroupsList = [{
+                                            Message = {
+                                                PlainTextMessage = {
+                                                    Value = "Por favor, envie o texto ou áudio a ser traduzido."
+                                                }
+                                            }
+                                        }]
+                                    },
+                                    SlotCaptureSetting = {
+                                        CodeHook = {
+                                            EnableCodeHookInvocation = true
+                                            IsActive = true
+                                            PostCodeHookSpecification = {
+                                                SuccessResponse = {
+                                                    MessageGroupsList = [{
+                                                        Message = {
+                                                            PlainTextMessage = {
+                                                                Value = "Essa mensagem não é usada."
+                                                            }
+                                                        }
+                                                    }]
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                Name         = "textOrAudioConditional"
+                                SlotTypeName = "AMAZON.AlphaNumeric" # Recognizes words made up of letters and numbers.
+                                ValueElicitationSetting = {
+                                    SlotConstraint = "Required"
+                                    PromptSpecification = {
+                                        MaxRetries = 1
+                                        MessageGroupsList = [{
+                                            Message = {
+                                                ImageResponseCard = {
+                                                    Title = "Você deseja receber o texto ou áudio enviado como um áudio ou como texto?"
+                                                    Buttons = [{
+                                                        "Text": "Como texto",
+                                                        "Value": "text"
+                                                    },
+                                                    {
+                                                        "Text": "Como áudio",
+                                                        "Value": "audio"
+                                                    }]
+                                                }
+                                            }
+                                        }]
+                                    },
+                                    SlotCaptureSetting = {
+                                        CodeHook = {
+                                            EnableCodeHookInvocation = true
+                                            IsActive = true
+                                            PostCodeHookSpecification = {
+                                                SuccessResponse = {
+                                                    MessageGroupsList = [{
+                                                        Message = {
+                                                            PlainTextMessage = {
+                                                                Value = "Essa mensagem não é usada."
+                                                            }
+                                                        }
+                                                    }]
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                        SlotPriorities = [
+                            { Priority = 1, SlotName = "languageConditional" },
+                            { Priority = 2, SlotName = "textOrAudioReceiver" },
+                            { Priority = 3, SlotName = "textOrAudioConditional" }
                         ]
                     },
                     {
@@ -122,6 +290,92 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                         SampleUtterances = [
                             { Utterance = "CepToTip" },
                         ]
+                        Slots = [
+                            {
+                                Name         = "cepFromUser"
+                                SlotTypeName = "AMAZON.AlphaNumeric" # Recognizes words made up of letters and numbers.
+                                ValueElicitationSetting = {
+                                    SlotConstraint = "Required"
+                                    PromptSpecification = {
+                                        MaxRetries = 1
+                                        MessageGroupsList = [{
+                                            Message = {
+                                                PlainTextMessage = {
+                                                    Value = "Por favor, envie o cep da sua localização (apenas números)."
+                                                }
+                                            }
+                                        }]
+                                    },
+                                    SlotCaptureSetting = {
+                                        CodeHook = {
+                                            EnableCodeHookInvocation = true
+                                            IsActive = true
+                                            PostCodeHookSpecification = {
+                                                SuccessResponse = {
+                                                    MessageGroupsList = [{
+                                                        Message = {
+                                                            PlainTextMessage = {
+                                                                Value = "Essa mensagem não é usada."
+                                                            }
+                                                        }
+                                                    }]
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                Name         = "pointsOfInterest"
+                                SlotTypeName = "AMAZON.AlphaNumeric" # Recognizes words made up of letters and numbers.
+                                ValueElicitationSetting = {
+                                    SlotConstraint = "Required"
+                                    PromptSpecification = {
+                                        MaxRetries = 1
+                                        MessageGroupsList = [{
+                                            Message = {
+                                                ImageResponseCard = {
+                                                    Title = "Qual ponto de interesse você deseja saber a localização mais próxima?"
+                                                    Buttons = [{
+                                                        "Text": "Hospital",
+                                                        "Value": "hospital"
+                                                    },
+                                                    {
+                                                        "Text": "Policia",
+                                                        "Value": "policia"
+                                                    },
+                                                    {
+                                                        "Text": "Restaurante",
+                                                        "Value": "restaurante"
+                                                    }]
+                                                }
+                                            }
+                                        }]
+                                    },
+                                    SlotCaptureSetting = {
+                                        CodeHook = {
+                                            EnableCodeHookInvocation = true
+                                            IsActive = true
+                                            PostCodeHookSpecification = {
+                                                SuccessResponse = {
+                                                    MessageGroupsList = [{
+                                                        Message = {
+                                                            PlainTextMessage = {
+                                                                Value = "Essa mensagem não é usada."
+                                                            }
+                                                        }
+                                                    }]
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                        SlotPriorities = [
+                            { Priority = 1, SlotName = "cepFromUser" },
+                            { Priority = 2, SlotName = "pointsOfInterest" }
+                        ]
                     },
                     {
                         Name = "EmergencyContacts"
@@ -131,6 +385,57 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                         }
                         SampleUtterances = [
                             { Utterance = "EmergencyContacts" },
+                        ]
+                        Slots = [
+                            {
+                                Name         = "emergencyContact"
+                                SlotTypeName = "AMAZON.AlphaNumeric" # Recognizes words made up of letters and numbers.
+                                ValueElicitationSetting = {
+                                    SlotConstraint = "Required"
+                                    PromptSpecification = {
+                                        MaxRetries = 1
+                                        MessageGroupsList = [{
+                                            Message = {
+                                                ImageResponseCard = {
+                                                    Title = "Qual contato de emergência você deseja?"
+                                                    Buttons = [{
+                                                        "Text": "Ambulância",
+                                                        "Value": "ambulancia"
+                                                    },
+                                                    {
+                                                        "Text": "Policia",
+                                                        "Value": "policia"
+                                                    },
+                                                    {
+                                                        "Text": "Bombeiros",
+                                                        "Value": "bombeiros"
+                                                    }]
+                                                }
+                                            }
+                                        }]
+                                    },
+                                    SlotCaptureSetting = {
+                                        CodeHook = {
+                                            EnableCodeHookInvocation = true
+                                            IsActive = true
+                                            PostCodeHookSpecification = {
+                                                SuccessResponse = {
+                                                    MessageGroupsList = [{
+                                                        Message = {
+                                                            PlainTextMessage = {
+                                                                Value = "Essa mensagem não é usada."
+                                                            }
+                                                        }
+                                                    }]
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                        SlotPriorities = [
+                            { Priority = 1, SlotName = "emergencyContact" }
                         ]
                     },
                     {
