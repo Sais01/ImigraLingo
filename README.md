@@ -1,30 +1,139 @@
-# Avaliação Sprints 9 e 10 - Projeto Final - Programa de Bolsas Compass UOL / AWS e FURG/IFRS/UFFS
+<div align="center">
+  <img src="./docImages/logo.png" alt="Logo UOL" width="120px" height="120px">
+</div>
 
-Avaliação das sprints 9 e 10 do programa de bolsas Compass UOL para formação em machine learning para AWS.
+<div align="center">
+  <h1>UOL ImigraLingo Assist</h1>
+</div>
+
+<div align="center">
+  <h2>UOL ImigraLingo Assist - O desenvolvimento do chatbot destinado a servir como um Guia Multifuncional para Imigrantes Francófonos no Brasil</h2>
+</div>
+
+<div align="center">
+  <p>Conheça a incrível equipe por trás deste projeto</p>
+</div>
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/angemydelson">
+          <img src="https://avatars.githubusercontent.com/u/98717411?v=4" width="100px;" alt="Foto do Angemydelson Saint Bert"/><br>
+          <sub><b>Angemydelson Saint Bert</b></sub>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/Sais01">
+          <img src="https://avatars.githubusercontent.com/u/47997616?v=4" width="100px;" alt="Foto do Cristofer Gaier Sais"/><br>
+          <sub><b>Cristofer Gaier Sais</b></sub>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/NicolauNobre">
+          <img src="https://avatars.githubusercontent.com/u/68488845?v=4" width="100px;" alt="Foto do Nicolas Nobre Brasil"/><br>
+          <sub><b>Nicolas Nobre Brasil</b></sub>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://www.linkedin.com/in/felipemarzani/">
+          <img src="https://avatars.githubusercontent.com/u/107329291?v=4" width="100px;" alt="Foto do Felipe Marzani da Silva"/><br>
+          <sub><b>Felipe Marzani da Silva</b></sub>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://www.linkedin.com/in/matheusspintom/">
+          <img src="https://avatars.githubusercontent.com/u/95148274?v=4" width="100px;" alt="Matheus Siqueira Pinto"/><br>
+          <sub><b>Matheus Siqueira Pinto</b></sub>
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
 
 ---
 
-## Execução
+---
 
-Deverá ser produzido um projeto final para apresentação pública ao final deste Programa de Bolsas.
+<div align="center">
+  <h2>📑 Sumário</h2>
+</div>
 
-**Especificações**:
+---
 
-A equipe devevá:
+### 1. [Propósito](#ancora1)
+   - 1.1 [Ferramentas Utilizadas](#ancora1-1)
+   
+### 2. [Evolução do Projeto](#ancora2)
+   - 2.1 [](#ancora2-1)
+   - 2.2 [](#ancora2-2)
 
-1 - Escolher uma aplicação prática para implementação e definir a arquitetura preliminar AWS até 10/10/2023;
+### 3. [Estrutura de Diretórios](#ancora3)
 
-2 - A aplicação deverá contemplar, no mínimo, as seguintes ferramentas AWS:
+### 4. [Infraestrutura na AWS](#ancora4)
 
-- Transcribe e/ou Polly;
-- Rekognition;
-- Lex;
+### 5. [Desafios Enfrentados](#ancora5)
+
+
+---
+
+<a id="ancora1"></a>
+## 1. Propósito
+-
+
   
-3 - O canal do chatbot Lex deverá ser de uso público e permitir o envio de som e imagem.
+-
+---
 
-Dicas: procurem implementar uma aplicação de apelo social e busquem contatos com organizações públicas (universidades, associações, etc.).
+<a id="ancora1-1"></a>
+### 1.1 Ferramentas Utilizadas
+
+<div align="center">
+  <img align="center" alt="Python" height="30" src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" />
+    <!-- <img align="center" alt="NodeJS" height="28" width="28" src="https://th.bing.com/th?id=ODLS.3891574d-ed49-4720-9a83-edb0952d05a3&w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2" /> -->
+    <img align="center" alt="Git" height="28" width="42" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg">
+    <img align="center" alt="AWS" height="28" width="42" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/1024px-    Amazon_Web_Services_Logo.svg.png" />
+    <!-- <img align="center" alt="Amplifyer" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/9da5a168cf8194c8ee5ed192a443d563-674375b53bc8ae94f48cfdb5c81e8363.svg" /> -->
+    <img align="center" alt="S3" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/c0828e0381730befd1f7a025057c74fb-43acc0496e64afba82dbc9ab774dc622.svg" />
+    <img align="center" alt="Serverless" height="28" width="42" src="https://assets-global.website-files.com/60acbb950c4d6606963e1fed/611631cd314b2abec6c29ec0_bolt.svg" />
+    <!-- <img align="center" alt="DynamoDB" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/6f419a45e63123b4c16bd679549610f6-87862c68693445999110bbd6a467ce88.svg" /> -->
+    <img align="center" alt="Amazon API Gateway" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/fb0cde6228b21d89ec222b45efec54e7-0856e92285f4e7ed254b2588d1fe1829.svg" />
+    <img align="center" alt="HTML" height="30" src="./docImages/Terraform.png" />
+   
+
+
+
+
+    
+</div>
+
+
+---
+
+<a id="ancora2"></a>
+## 2. Evolução do Projeto
+
+<a id="ancora2-1"></a>
+#### 2.1 
+
+<!-- Detalhes sobre a contrução de v1/vision e resultados aqui -->
+  - 
+<a id="ancora2-2"></a>
+<a id="ancora2-1"></a>
+#### 2.2 
+
+<!-- Detalhes sobre a contrução de v2/vision e resultados aqui -->
+  - 
+
+<a id="ancora3"></a>
+## 3. Estrutura de Diretórios
+
 
 ***
+
+---
+
+<a id="ancora4"></a>
 
 ## Arquitetura do Bot
 
@@ -39,38 +148,9 @@ O bot terá como foco ajudar imigrantes da lingua francesa a se comunicar com a 
   <p> Fluxograma das intents
 </div>
 
-## O que será avaliado
+## 5. Desafios Enfrentados
 
-- Praticidade de utilização
-- Eficácia da aplicação
-- Uso racional da arquitetura AWS
-- Projeto em produção na AWS
-- Códigos utilizados na implementação da arquitetura
-- Se usado o modelo para treinamento/reconhecimento:
-  - Divisão dos dados para treino e teste
-  - Taxa de assertividade aceitável (se o modelo está classificando corretamente)
-  - Entendimento da equipe sobre o modelo utilizado (saber explicar o que foi feito)
-  - Mostrar resposta do modelo para classificação
-- Organização geral do código fonte:
-  - Estrutura de pastas
-  - Divisão de responsabilidades em arquivos/pastas distintos
-  - Otimização do código fonte (evitar duplicações de código)
-- Objetividade do README.md
+<!-- Desafios enfrentados durante o desenvolvimento -->
 
-***
 
-## Entrega
-
-- Aceitar o convite do repositório da sprint-9-10-pb-aws-ufu;
-- **O trabalho deve ser feito em dois grupos de cinco e um grupo de seis pessoas, que serão distribuídos em reunião dia 04/10/2023**;
-- **O tema do trabalho e o esboço da arquitetura deverá ser comunicado até dia 10/10/2023**;
-- Criar uma branch no repositório com o formato grupo-número (Exemplo: grupo-1);
-- **O grupo deverá fazer uma apresentação de protótipo (prova de conceito - PoC) em ensaio preliminar dia 24/10/2023**;
-- Subir o trabalho na branch com um README.md:
-  - documentar detalhes sobre como a avaliação foi desenvolvida
-  - dificuldades conhecidas
-  - como utilizar o sistema
-  - 🔨 código fonte desenvolvido (Sugestão: pasta `src`)
-- **Cada grupo deverá fazer uma apresentação do trabalho completo desenvolvido no dia 31/10/2023**.
-- O prazo de entrega é até às 12h do dia 08/11/2023 no repositório do github ([https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-9-10-pb-aws-furg-ifrs-uffs](https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-9-10-pb-aws-furg-ifrs-uffs)).
-
+---
