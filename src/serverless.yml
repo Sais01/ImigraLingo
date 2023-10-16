@@ -10,13 +10,47 @@ provider:
 
   iam:
     role:
-      name: lambdaFinalLexBotRole
       statements:
-        - Effect  : Allow
-          Action  : 
-            - lambda:InvokeFunction
+        - Effect: Allow
+          Action:
+            - rekognition:DetectText
           Resource: "*"
+
+  environment:
+    API_KEY_OPENCAGE_GEOCODE: ${env:API_KEY_OPENCAGE_GEOCODE}
+    BUCKET_NAME: ${env:BUCKET_NAME}
+    AROUND_SEARCH_PLACES: ${env:AROUND_SEARCH_PLACES}
+    NUMBER_OF_PLACES: ${env:NUMBER_OF_PLACES}
+    VIA_CEP_BASE_URL: ${env:VIA_CEP_BASE_URL}
+    OVERPASS_API_BASE_URL: ${env:OVERPASS_API_BASE_URL}
+    OPENSTREETMAP_BASE_URL: ${env:OPENSTREETMAP_BASE_URL}
+
+resources:
+  Resources:
+    S3Bucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${env:BUCKET_NAME}
 
 functions:
   lexIntentVerifier:
+<<<<<<< HEAD
     handler: router_controller.handlerLexIntentVerifier
+=======
+    handler: handler.handlerLexIntentVerifier
+  cep_to_places:
+    handler: controllers/intents/cep_to_places_controller.handle_cep_to_places
+
+  image_to_text:
+    handler: controllers/intents/image_text_extraction_controller.image_to_text_handler
+    events:
+      - httpApi:
+          path: /testing
+          method: get
+
+  
+
+plugins:
+  - serverless-offline
+  - serverless-python-requirements
+>>>>>>> a8ede13a56428962aaeb0ef4552a52ef9a8a9600
