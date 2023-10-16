@@ -7,8 +7,25 @@ provider:
   name   : aws
   region : us-east-1 
   runtime: python3.9
+
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - rekognition:DetectText
+          Resource: "*"
+
   environment:
     API_KEY_OPENCAGE_GEOCODE: ${env:API_KEY_OPENCAGE_GEOCODE}
+    BUCKET_NAME: ${env:BUCKET_NAME}
+
+resources:
+  Resources:
+    S3Bucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${env:BUCKET_NAME}
 
 
 functions:
@@ -16,6 +33,15 @@ functions:
     handler: handler.handlerLexIntentVerifier
   cep_to_places:
     handler: controllers/intents/cep_to_places_controller.handle_cep_to_places
+
+  image_to_text:
+    handler: controllers/intents/image_text_extraction_controller.image_to_text_handler
+    events:
+      - httpApi:
+          path: /testing
+          method: get
+
+  
 
 plugins:
   - serverless-offline
