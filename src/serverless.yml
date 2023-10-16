@@ -34,10 +34,7 @@ resources:
 
 functions:
   lexIntentVerifier:
-<<<<<<< HEAD
     handler: router_controller.handlerLexIntentVerifier
-=======
-    handler: handler.handlerLexIntentVerifier
   cep_to_places:
     handler: controllers/intents/cep_to_places_controller.handle_cep_to_places
 
@@ -53,4 +50,3 @@ functions:
 plugins:
   - serverless-offline
   - serverless-python-requirements
->>>>>>> a8ede13a56428962aaeb0ef4552a52ef9a8a9600
