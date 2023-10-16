@@ -19,6 +19,11 @@ provider:
   environment:
     API_KEY_OPENCAGE_GEOCODE: ${env:API_KEY_OPENCAGE_GEOCODE}
     BUCKET_NAME: ${env:BUCKET_NAME}
+    AROUND_SEARCH_PLACES: ${env:AROUND_SEARCH_PLACES}
+    NUMBER_OF_PLACES: ${env:NUMBER_OF_PLACES}
+    VIA_CEP_BASE_URL: ${env:VIA_CEP_BASE_URL}
+    OVERPASS_API_BASE_URL: ${env:OVERPASS_API_BASE_URL}
+    OPENSTREETMAP_BASE_URL: ${env:OPENSTREETMAP_BASE_URL}
 
 resources:
   Resources:
@@ -26,7 +31,6 @@ resources:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: ${env:BUCKET_NAME}
-
 
 functions:
   lexIntentVerifier:
