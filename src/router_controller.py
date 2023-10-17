@@ -1,4 +1,4 @@
-from responseFormatters import prepare_response_text, prepare_response_elicitSlot
+from utils.response_formatters import prepare_response_text, prepare_response_elicitSlot
 
 def handlerLexIntentVerifier(event, context):
     intent = event['sessionState']['intent']['name']
