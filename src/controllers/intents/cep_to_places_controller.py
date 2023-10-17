@@ -1,5 +1,5 @@
 from services.geo_service import cep_to_location, location_to_coordinates, places_by_coordinates
-from utils import prepare_response_text
+from responseFormatters import prepare_response_text
 
 def handle_cep_to_places(event, context):
   try:

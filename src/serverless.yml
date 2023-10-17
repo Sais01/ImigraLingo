@@ -34,7 +34,7 @@ resources:
 
 functions:
   lexIntentVerifier:
-    handler: handler.handlerLexIntentVerifier
+    handler: router_controller.handlerLexIntentVerifier
   cep_to_places:
     handler: controllers/intents/cep_to_places_controller.handle_cep_to_places
 
