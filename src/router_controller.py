@@ -3,7 +3,11 @@ from responseFormatters import prepare_response_text, prepare_response_elicitSlo
 def handlerLexIntentVerifier(event, context):
     intent = event['sessionState']['intent']['name']
 
-    if (intent == 'ImageTextExtractionIntent'):
+    if (intent == 'IntroductionIntent'):
+        response = f"Boas vindas ao ImigraLingo, bot de ajuda ao imigrante! O que deseja fazer? Caso não conheça meus comandos, digite 'ajuda'!"
+        return prepare_response_text(event, response)
+    
+    elif (intent == 'ImageTextExtractionIntent'):
         imgFromUser            = event['sessionState']['intent']['slots']['imgFromUser']
         textOrAudioConditional = event['sessionState']['intent']['slots']['textOrAudioConditional']
 
@@ -26,7 +30,7 @@ def handlerLexIntentVerifier(event, context):
           
         return prepare_response_elicitSlot(event)
 
-    elif (intent == 'TextAudioTranslater'):
+    elif (intent == 'TextAudioTranslaterIntent'):
         languageConditional    = event['sessionState']['intent']['slots']['languageConditional']
         textOrAudioReceiver    = event['sessionState']['intent']['slots']['textOrAudioReceiver']
         textOrAudioConditional = event['sessionState']['intent']['slots']['textOrAudioConditional']
@@ -47,7 +51,7 @@ def handlerLexIntentVerifier(event, context):
             
         return prepare_response_elicitSlot(event)
     
-    elif (intent == 'CepToTip'):
+    elif (intent == 'CepToTipIntent'):
         cepFromUser      = event['sessionState']['intent']['slots']['cepFromUser']
         pointsOfInterest = event['sessionState']['intent']['slots']['pointsOfInterest']
 
@@ -65,7 +69,7 @@ def handlerLexIntentVerifier(event, context):
             
         return prepare_response_elicitSlot(event)
 
-    elif (intent == 'EmergencyContacts'):
+    elif (intent == 'EmergencyContactsIntent'):
         emergencyContact = event['sessionState']['intent']['slots']['emergencyContact']
 
         if (emergencyContact != None):
@@ -78,5 +82,7 @@ def handlerLexIntentVerifier(event, context):
             
         return prepare_response_elicitSlot(event)
     
-    elif (intent == 'HowToMakeDocs'):
-        return prepare_response_text(event, "eu entrei na intent HowToMakeDocs retorno")
+    elif (intent == 'HowToMakeDocsIntent'):
+        link     = "https://encurtador.com.br/nqswz"
+        response = f"Você pode encontrar todas as informações necessárias para a emissão de documentos no link: {link}"
+        return prepare_response_text(event, response)

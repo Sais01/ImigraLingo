@@ -9,6 +9,7 @@ resource "aws_cloudformation_stack" "finalSprintAliasBotStackv1" {
                     BotId = data.external.getBotId.result["bot_id"]
                     BotAliasName = "finalSprintAliasBotv1"
                     Description = "Alias para o bot da sprint final."
+                    BotVersion = "3"
                     BotAliasLocaleSettings = [{
                         LocaleId = "pt_BR"
                         BotAliasLocaleSetting = {
