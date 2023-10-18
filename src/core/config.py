@@ -7,5 +7,7 @@ class Settings:
     VIA_CEP_BASE_URL = os.getenv("VIA_CEP_BASE_URL")
     OVERPASS_API_BASE_URL = os.getenv("OVERPASS_API_BASE_URL")
     OPENSTREETMAP_BASE_URL = os.getenv("OPENSTREETMAP_BASE_URL")
+    BUCKET_NAME = os.getenv("BUCKET_NAME")
+    IMAGE_NAME = os.getenv("IMAGE_NAME")
 
 settings = Settings()

@@ -1,37 +1,42 @@
-# def handle_image_text_extraction():
-#   pass
-
 import json
 import boto3
+from core.config import settings
 
-rekognition = boto3.client('rekognition')
+rekognition = boto3.client("rekognition")
+
+BUCKET_NAME = settings.BUCKET_NAME
+IMAGE_NAME = settings.IMAGE_NAME
+
+
+def format_response_data(response_data):
+    json_data = json.dumps(response_data)
+    decoded_data = json_data.encode("utf-8").decode("unicode-escape")
+    decoded_data = decoded_data.replace('"', "'")
+
+    return decoded_data
+
 
 def image_to_text_handler(event, context):
-    # The S3 bucket and object key where the image is stored
-    # bucket = event['Records'][0]['s3']['bucket']['name']
-    # key = event['Records'][0]['s3']['object']['key']
+    try:
+        bucket = BUCKET_NAME
+        key = IMAGE_NAME
 
-    try: 
-      bucket = "teste-bucket-mathsp-segundo"
-      key = "placa-seguranca.jpg"
+        # Detect text in the image
+        response = rekognition.detect_text(
+            Image={"S3Object": {"Bucket": bucket, "Name": key}}
+        )
 
-      # Detect text in the image
-      response = rekognition.detect_text(Image={'S3Object': {'Bucket': bucket, 'Name': key}})
+        detected_text = []
+        for item in response["TextDetections"]:
+            if item["Type"] == "WORD" and item["Confidence"] >= 50:
+                detected_text.append(item["DetectedText"])
 
-      detected_text = []
-      for item in response['TextDetections']:
-          detected_text.append(item['DetectedText'])
+        decoded_data = format_response_data(detected_text)
 
-      print(detected_text)
+        return {"statusCode": 200, "body": decoded_data}
 
-      return {
-          'statusCode': 200,
-          'body': json.dumps(detected_text)
-      }
-    
     except Exception as e:
         print(e)
 
 
-if __name__ == '__main__':
-    print("Olá mundo")
+# if __name__ == '__main__':
