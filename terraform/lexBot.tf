@@ -31,19 +31,61 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                     {
                         Name = "IntroductionIntent"
                         Description = "Intent de boas vindas ao bot."
+                        DialogCodeHook = {
+                            Enabled = true
+                        }
+                        # InitialResponseSetting = {
+                        #     InitialResponse = {
+                        #         MessageGroupsList = [{
+                        #         Message = {
+                        #             PlainTextMessage = {
+                        #                 Value = "Boas vindas ao ImigraLingo, bot de ajuda ao imigrante! O que deseja fazer?"
+                        #             }
+                        #         }
+                        #         }]
+                        #     }
+                        # }
+                        SampleUtterances = [
+                            { Utterance = "ola" }
+                        ]
+                    },
+                    {
+                        Name = "HelpsIntent"
+                        Description = "Intent que retorna as opções de ajuda para o usuário imigrante."
                         InitialResponseSetting = {
                             InitialResponse = {
                                 MessageGroupsList = [{
                                 Message = {
-                                    PlainTextMessage = {
-                                        Value = "Boas vindas ao Bot de ajuda ao imigrante! O que deseja fazer?"
+                                    ImageResponseCard = {
+                                        Title    = "Opções"
+                                        Subtitle = "Escolha uma das opções abaixo para acionar a ajuda!"
+                                        Buttons  = [{
+                                            "Text": "Como fazer documentos",
+                                            "Value": "HowToMakeDocs"
+                                        },
+                                        {
+                                            "Text": "Contatos de emergência",
+                                            "Value": "EmergencyContacts"
+                                        },
+                                        {
+                                            "Text": "Dicas de localização",
+                                            "Value": "CepToTip"
+                                        },
+                                        {
+                                            "Text": "Tradutor de texto e áudio",
+                                            "Value": "TextAudioTranslater"
+                                        },
+                                        {
+                                            "Text": "Extrator de texto de imagem",
+                                            "Value": "ImageTextExtraction"
+                                        }]
                                     }
                                 }
                                 }]
                             }
                         }
                         SampleUtterances = [
-                            { Utterance = "ola" }
+                            { Utterance = "ajuda" }
                         ]
                     },
                     {
@@ -147,7 +189,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                         ]
                     },
                     {
-                        Name = "TextAudioTranslater"
+                        Name = "TextAudioTranslaterIntent"
                         Description = "Recebe um texto ou um áudio do usuário imigrante retorna um texto traduzido para portugues ou áudio do texto traduzido."
                         DialogCodeHook = {
                           Enabled = true
@@ -282,7 +324,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                         ]
                     },
                     {
-                        Name = "CepToTip"
+                        Name = "CepToTipIntent"
                         Description = "recebe um cep do usuário imigrante e retorna dicas de onde ficam hospitais, restaurates, etc."
                         DialogCodeHook = {
                           Enabled = true
@@ -378,7 +420,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                         ]
                     },
                     {
-                        Name = "EmergencyContacts"
+                        Name = "EmergencyContactsIntent"
                         Description = "retorna contatos de emergência para o usuário imigrante, como ambulancias e policia."
                         DialogCodeHook = {
                           Enabled = true
@@ -439,7 +481,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                         ]
                     },
                     {
-                        Name = "HowToMakeDocs"
+                        Name = "HowToMakeDocsIntent"
                         Description = "retorna informações sobre como fazer documentos para o usuário imigrante."
                         DialogCodeHook = {
                           Enabled = true

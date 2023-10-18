@@ -139,3 +139,6 @@ venv
 terraform.tfstate
 terraform.tfstate.backup
 .terraform
+
+#Teste event serverless function
+test
