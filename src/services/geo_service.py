@@ -88,15 +88,11 @@ def places_by_coordinates(lat, lon, place_type):
       for i, place in enumerate(results[:NUMBER_OF_PLACES], start=1):
         place_infos = place.get("tags", {})
         place_name = place_infos.get("name", "Nom non disponible")
-        place_city = place_infos.get("addr:city", "Ville non disponible")
-        place_number = place_infos.get("addr:housenumber", "Numéro non disponible")
-        place_street = place_infos.get("addr:street", "Rue non disponible")
-        place_address = f"{place_number}, rue {place_street}, {place_city}"
 
         lat = place["lat"]
         lon = place["lon"]
         maps_link = f"{OPENSTREETMAP_BASE_URL}/?mlat={lat}&mlon={lon}#map=16/{lat}/{lon}"
-        place_info = f"{i}. Nom: {place_name}\n   Adresse: {place_address}\n   Lien sur Maps: {maps_link}\n"
+        place_info = f"{i}. Nom: {place_name}\n Lien sur Maps: {maps_link}\n"
         places.append(place_info)
       return "\n".join(places)
     else:
