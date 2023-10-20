@@ -14,6 +14,9 @@ provider:
         - Effect: Allow
           Action:
             - rekognition:DetectText
+            - "polly:SynthesizeSpeech"
+            - s3:GetObject
+            - s3:PutObject
           Resource: "*"
 
   environment:
@@ -45,6 +48,13 @@ functions:
       - httpApi:
           path: /testing
           method: get
+
+  text_to_audio:
+    handler: services/polly_service.tts
+    events:
+      - httpApi:
+          path: /tts
+          method: post
 
   
 
