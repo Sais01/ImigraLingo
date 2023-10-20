@@ -4,8 +4,8 @@ from utils.response_formatters import prepare_response_text
 def handle_cep_to_places(event, context):
   try:
     slots = event['interpretations'][0]['intent']['slots']
-    cep = slots['cep']['value']['interpretedValue']
-    place_type = slots['place_type']['value']['interpretedValue']
+    cep = slots['cepFromUser']['value']['originalValue']
+    place_type = slots['pointsOfInterest']['value']['originalValue']
     address = cep_to_location(cep)
     if address:
       lat, lon = location_to_coordinates(address)

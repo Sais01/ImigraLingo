@@ -18,6 +18,9 @@ provider:
             - s3:GetObject
             - s3:PutObject
           Resource: "*"
+        - Effect: Allow
+          Action: lambda:InvokeFunction
+          Resource: "*"
 
   environment:
     API_KEY_OPENCAGE_GEOCODE: ${env:API_KEY_OPENCAGE_GEOCODE}

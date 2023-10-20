@@ -1,6 +1,11 @@
 from utils.response_formatters import prepare_response_text, prepare_response_elicitSlot
+import boto3
+import json
+
 
 def handlerLexIntentVerifier(event, context):
+    client = boto3.client('lambda')
+
     intent = event['sessionState']['intent']['name']
 
     if (intent == 'IntroductionIntent'):
@@ -52,22 +57,10 @@ def handlerLexIntentVerifier(event, context):
         return prepare_response_elicitSlot(event)
     
     elif (intent == 'CepToTipIntent'):
-        cepFromUser      = event['sessionState']['intent']['slots']['cepFromUser']
-        pointsOfInterest = event['sessionState']['intent']['slots']['pointsOfInterest']
-
-        if (cepFromUser != None):
-            print("entrou no if cepFromUser != None e vai ilicitar o slot pointsOfInterest")
-            return prepare_response_elicitSlot(event)
-        
-        if (pointsOfInterest != None):
-            if (pointsOfInterest['value']['originalValue'] == 'hospital'):
-                return prepare_response_text(event, "cepToTip concluida, usuario receberá hospital")
-            if (pointsOfInterest['value']['originalValue'] == 'policia'):
-                return prepare_response_text(event, "cepToTip concluida, usuario receberá policia")
-            if (pointsOfInterest['value']['originalValue'] == 'restaurante'):
-                return prepare_response_text(event, "cepToTip concluida, usuario receberá restaurante")
-            
-        return prepare_response_elicitSlot(event)
+        invoke_response = client.invoke(FunctionName="final-lex-bot-v1-dev-cep_to_places", Payload = json.dumps(event))
+        print(invoke_response)
+        payload = json.load(invoke_response['Payload'])
+        return payload
 
     elif (intent == 'EmergencyContactsIntent'):
         emergencyContact = event['sessionState']['intent']['slots']['emergencyContact']

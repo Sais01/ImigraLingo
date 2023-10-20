@@ -31,7 +31,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                     {
                         Name = "IntroductionIntent"
                         Description = "Intent de boas vindas ao bot."
-                        DialogCodeHook = {
+                        FulfillmentCodeHook = {
                             Enabled = true
                         }
                         # InitialResponseSetting = {
@@ -91,7 +91,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                     {
                         Name        = "ImageTextExtractionIntent"
                         Description = "Recebe uma imagem do usuário imigrante e realiza a extração de texto contido na imagem e retorna para o usuário."
-                        DialogCodeHook = {
+                        FulfillmentCodeHook = {
                           Enabled = true
                         }
                         SampleUtterances = [
@@ -191,7 +191,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                     {
                         Name = "TextAudioTranslaterIntent"
                         Description = "Recebe um texto ou um áudio do usuário imigrante retorna um texto traduzido para portugues ou áudio do texto traduzido."
-                        DialogCodeHook = {
+                        FulfillmentCodeHook = {
                           Enabled = true
                         }
                         SampleUtterances = [
@@ -326,7 +326,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                     {
                         Name = "CepToTipIntent"
                         Description = "recebe um cep do usuário imigrante e retorna dicas de onde ficam hospitais, restaurates, etc."
-                        DialogCodeHook = {
+                        FulfillmentCodeHook = {
                           Enabled = true
                         }
                         SampleUtterances = [
@@ -384,11 +384,11 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                                     },
                                                     {
                                                         "Text": "Policia",
-                                                        "Value": "policia"
+                                                        "Value": "police"
                                                     },
                                                     {
                                                         "Text": "Restaurante",
-                                                        "Value": "restaurante"
+                                                        "Value": "restaurant"
                                                     }]
                                                 }
                                             }
@@ -422,7 +422,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                     {
                         Name = "EmergencyContactsIntent"
                         Description = "retorna contatos de emergência para o usuário imigrante, como ambulancias e policia."
-                        DialogCodeHook = {
+                        FulfillmentCodeHook = {
                           Enabled = true
                         }
                         SampleUtterances = [
@@ -483,7 +483,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                     {
                         Name = "HowToMakeDocsIntent"
                         Description = "retorna informações sobre como fazer documentos para o usuário imigrante."
-                        DialogCodeHook = {
+                        FulfillmentCodeHook = {
                           Enabled = true
                         }
                         SampleUtterances = [
