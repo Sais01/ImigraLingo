@@ -1,40 +1,40 @@
-import boto3
 from core.config import settings
-from utils.decode_response_data import decode_response_data
-from utils.check_has_text import check_has_text
+from services.rekognition_service import extract_text_from_image
+from utils.response_formatters import prepare_response_text
 
-rekognition = boto3.client("rekognition")
 
 BUCKET_NAME = settings.BUCKET_NAME
 IMAGE_NAME = settings.IMAGE_NAME
+# IMAGE_NAME = "placa-seguranca.jpg"
 
-def image_to_text_handler(event, context):
+
+
+
+def handle_image_to_text(event, context):
     try:
-        bucket = BUCKET_NAME
-        key = IMAGE_NAME
 
-        # Detect text in the image
-        response = rekognition.detect_text(
-            Image={"S3Object": {"Bucket": bucket, "Name": key}}
-        )
+        response_text_from_image = extract_text_from_image(BUCKET_NAME, IMAGE_NAME)
 
-        has_text = check_has_text(response["TextDetections"])
-        if not has_text:
-            no_text_message = "Não foi encontrado texto na imagem!"
-            
-            return {"statusCode": 200, "body": no_text_message}
-        
-        detected_text = []
-        for item in response["TextDetections"]:
-            if item["Type"] == "WORD" and item["Confidence"] >= 50:
-                detected_text.append(item["DetectedText"])
+        text_from_image = response_text_from_image["body"]["phrase"]
 
-        decoded_data = decode_response_data(detected_text)
+        print("1######################")
+        print(response_text_from_image["body"])
+        print("1@@@@@@@@@@@@@@@@@@@@@@")
 
-        return {"statusCode": 200, "body": decoded_data}
+        print("2######################")
+        print(text_from_image)
+        print("2@@@@@@@@@@@@@@@@@@@@@@")
+
+
+        # slots = event["interpretations"][0]["intent"]["slots"]
+
+        return prepare_response_text(event, text_from_image)
+
+
 
     except Exception as e:
-        print(e)
+        print(f"Error in image_text_extraction_controller: {e}")
+        return prepare_response_text(
+            event, f"Erreur lors du traitement de la demande d'achat: {str(e)}"
+        )
 
-
-# if __name__ == '__main__':

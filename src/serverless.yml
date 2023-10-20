@@ -43,7 +43,7 @@ functions:
     handler: controllers/intents/cep_to_places_controller.handle_cep_to_places
 
   image_to_text:
-    handler: controllers/intents/image_text_extraction_controller.image_to_text_handler
+    handler: controllers/intents/image_text_extraction_controller.handle_image_to_text
     events:
       - httpApi:
           path: /testing
