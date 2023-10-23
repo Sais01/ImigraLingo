@@ -31,25 +31,11 @@ def handlerLexIntentVerifier(event, context):
 
 
     elif (intent == 'TextAudioTranslaterIntent'):
-        languageConditional    = event['sessionState']['intent']['slots']['languageConditional']
-        textOrAudioReceiver    = event['sessionState']['intent']['slots']['textOrAudioReceiver']
-        textOrAudioConditional = event['sessionState']['intent']['slots']['textOrAudioConditional']
-
-        if (languageConditional != None):
-            print("entrou no if languageConditional != None e vai ilicitar o slot textOrAudioReceiver")
-            return prepare_response_elicitSlot(event)
-        
-        if (textOrAudioReceiver != None):
-            print("entrou no if textOrAudioReceiver != None e vai ilicitar o slot textOrAudioConditional")
-            return prepare_response_elicitSlot(event)
-        
-        if (textOrAudioConditional != None):
-            if (textOrAudioConditional['value']['originalValue'] == 'text'):
-                return prepare_response_text(event, "textAudioTranslater concluida, usuario receberá texto")
-            if (textOrAudioConditional['value']['originalValue'] == 'audio'):
-                return prepare_response_text(event, "textAudioTranslater concluida, usuario receberá audio")
-            
-        return prepare_response_elicitSlot(event)
+        invoke_response = client.invoke(FunctionName="final-lex-bot-v1-dev-text_audio_translater", Payload = json.dumps(event))
+        print(invoke_response)
+        print(invoke_response['Payload'])
+        payload = json.load(invoke_response['Payload'])
+        return payload
     
     elif (intent == 'CepToTipIntent'):
         invoke_response = client.invoke(FunctionName="final-lex-bot-v1-dev-cep_to_places", Payload = json.dumps(event))

@@ -16,7 +16,11 @@ def text_translate(text, source_language, target_language):
     translated_text = result['TranslatedText']
 
     return translated_text
+  
   except Exception as e:
     # Handle exceptions here
     print(e)
     return None
+
+# if __name__ == "__main__":
+#   print(text_translate("batata", "pt", "fr"))

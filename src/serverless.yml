@@ -62,6 +62,7 @@ resources:
                 Action: 
                   - s3:GetObject
                   - s3:GetObjectAttributes
+                  - s3:PutObject
                 Resource:
                   Fn::Join:
                     - ""
@@ -92,14 +93,8 @@ functions:
           path: /testing
           method: get
 
-  text_to_audio:
-    handler: services/polly_service.tts
-    events:
-      - httpApi:
-          path: /tts
-          method: post
-
-  
+  text_audio_translater:
+    handler: controllers/intents/text_audio_translater_controller.handle_text_audio_translater
 
 plugins:
   - serverless-offline
