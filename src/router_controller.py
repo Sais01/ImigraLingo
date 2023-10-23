@@ -13,27 +13,22 @@ def handlerLexIntentVerifier(event, context):
         return prepare_response_text(event, response)
     
     elif (intent == 'ImageTextExtractionIntent'):
-        imgFromUser            = event['sessionState']['intent']['slots']['imgFromUser']
+        imgFromUser            = event['sessionState']['intent']['slots']['imgFromUser']['value']['originalValue']
         textOrAudioConditional = event['sessionState']['intent']['slots']['textOrAudioConditional']
 
         print(f'imgFromUser: {imgFromUser}')
         print(f'textOrAudioConditional: {textOrAudioConditional}')
-
-        if (imgFromUser != None):
-            print("entrou no if imgFromUser != None e vai ilicitar o slot textOrAudioConditional")
-            return prepare_response_elicitSlot(event)
         
         if (textOrAudioConditional != None):
             if (textOrAudioConditional['value']['originalValue'] == 'text_fr'):
-                return prepare_response_text(event, "imageTextExtraction concluida, usuario receberá texto em francês")
+                return prepare_response_text(event, f"{imgFromUser}imageTextExtraction concluida, usuario receberá texto em francês")
             if (textOrAudioConditional['value']['originalValue'] == 'audio_fr'):
-                return prepare_response_text(event, "imageTextExtraction concluida, usuario receberá audio em francês")
+                return prepare_response_text(event, f"{imgFromUser}imageTextExtraction concluida, usuario receberá audio em francês")
             if (textOrAudioConditional['value']['originalValue'] == 'text_pt'):
-                return prepare_response_text(event, "imageTextExtraction concluida, usuario receberá texto em portugues")
+                return prepare_response_text(event, f"{imgFromUser}imageTextExtraction concluida, usuario receberá texto em portugues")
             if (textOrAudioConditional['value']['originalValue'] == 'audio_pt'):
-                return prepare_response_text(event, "imageTextExtraction concluida, usuario receberá audio em portugues")
-          
-        return prepare_response_elicitSlot(event)
+                return prepare_response_text(event, f"{imgFromUser}imageTextExtraction concluida, usuario receberá audio em portugues")
+
 
     elif (intent == 'TextAudioTranslaterIntent'):
         languageConditional    = event['sessionState']['intent']['slots']['languageConditional']

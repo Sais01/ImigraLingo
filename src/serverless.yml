@@ -10,6 +10,7 @@ provider:
 
   iam:
     role:
+      name: role-for-sprint-final
       statements:
         - Effect: Allow
           Action:
@@ -21,6 +22,12 @@ provider:
         - Effect: Allow
           Action: lambda:InvokeFunction
           Resource: "*"
+        - Effect: Allow
+          Action:
+            - s3:GetObject
+            - s3:GetObjectAttributes
+          Resource:
+            - arn:aws:s3:::${env:BUCKET_NAME}/*
 
   environment:
     API_KEY_OPENCAGE_GEOCODE: ${env:API_KEY_OPENCAGE_GEOCODE}
@@ -38,6 +45,39 @@ resources:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: ${env:BUCKET_NAME}
+        PublicAccessBlockConfiguration:
+          BlockPublicPolicy: false
+          RestrictPublicBuckets: false
+    MyBucketPolicy:
+        Type: AWS::S3::BucketPolicy
+        Properties:
+          Bucket:
+            Ref: S3Bucket
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Principal:
+                  AWS: "*"
+                Action: 
+                  - s3:GetObject
+                  - s3:GetObjectAttributes
+                Resource:
+                  Fn::Join:
+                    - ""
+                    - - "arn:aws:s3:::"
+                      - Ref: S3Bucket
+                      - "/*"
+              - Effect: Allow
+                Principal:
+                  AWS: "arn:aws:iam::${aws:accountId}:role/${self:provider.iam.role.name}"
+                Action: 
+                  - s3:ListBucket
+                Resource:
+                  Fn::Join:
+                    - ""
+                    - - "arn:aws:s3:::"
+                      - Ref: S3Bucket
 
 functions:
   lexIntentVerifier:

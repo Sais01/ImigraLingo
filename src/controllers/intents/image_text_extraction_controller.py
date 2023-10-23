@@ -2,17 +2,11 @@ from core.config import settings
 from services.rekognition_service import extract_text_from_image
 from utils.response_formatters import prepare_response_text
 
-
-BUCKET_NAME = settings.BUCKET_NAME
-IMAGE_NAME = settings.IMAGE_NAME
-# IMAGE_NAME = "placa-seguranca.jpg"
-
-
-
-
 def handle_image_to_text(event, context):
     try:
-
+        BUCKET_NAME = settings.BUCKET_NAME
+        IMAGE_NAME = settings.IMAGE_NAME
+        
         response_text_from_image = extract_text_from_image(BUCKET_NAME, IMAGE_NAME)
 
         text_from_image = response_text_from_image["body"]["phrase"]
