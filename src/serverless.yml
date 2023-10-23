@@ -18,16 +18,11 @@ provider:
             - "polly:SynthesizeSpeech"
             - s3:GetObject
             - s3:PutObject
+            - s3:GetObjectAttributes
           Resource: "*"
         - Effect: Allow
           Action: lambda:InvokeFunction
           Resource: "*"
-        - Effect: Allow
-          Action:
-            - s3:GetObject
-            - s3:GetObjectAttributes
-          Resource:
-            - arn:aws:s3:::${env:BUCKET_NAME}/*
 
   environment:
     API_KEY_OPENCAGE_GEOCODE: ${env:API_KEY_OPENCAGE_GEOCODE}

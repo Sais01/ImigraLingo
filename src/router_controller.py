@@ -13,21 +13,10 @@ def handlerLexIntentVerifier(event, context):
         return prepare_response_text(event, response)
     
     elif (intent == 'ImageTextExtractionIntent'):
-        imgFromUser            = event['sessionState']['intent']['slots']['imgFromUser']['value']['originalValue']
-        textOrAudioConditional = event['sessionState']['intent']['slots']['textOrAudioConditional']
-
-        print(f'imgFromUser: {imgFromUser}')
-        print(f'textOrAudioConditional: {textOrAudioConditional}')
-        
-        if (textOrAudioConditional != None):
-            if (textOrAudioConditional['value']['originalValue'] == 'text_fr'):
-                return prepare_response_text(event, f"{imgFromUser}imageTextExtraction concluida, usuario receberá texto em francês")
-            if (textOrAudioConditional['value']['originalValue'] == 'audio_fr'):
-                return prepare_response_text(event, f"{imgFromUser}imageTextExtraction concluida, usuario receberá audio em francês")
-            if (textOrAudioConditional['value']['originalValue'] == 'text_pt'):
-                return prepare_response_text(event, f"{imgFromUser}imageTextExtraction concluida, usuario receberá texto em portugues")
-            if (textOrAudioConditional['value']['originalValue'] == 'audio_pt'):
-                return prepare_response_text(event, f"{imgFromUser}imageTextExtraction concluida, usuario receberá audio em portugues")
+        invoke_response = client.invoke(FunctionName="final-lex-bot-v1-dev-image_to_text", Payload = json.dumps(event))
+        print(invoke_response)
+        payload = json.load(invoke_response['Payload'])
+        return payload
 
 
     elif (intent == 'TextAudioTranslaterIntent'):

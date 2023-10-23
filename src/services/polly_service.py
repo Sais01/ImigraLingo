@@ -3,32 +3,35 @@ from datetime import datetime
 # import json
 import boto3
 
-s3_client    = boto3.client("s3", region_name="us-east-1")
-polly_client = boto3.client("polly", region_name="us-east-1")
-voicePolly   = "Camila"
+s3_client    = boto3.client("s3")
+polly_client = boto3.client("polly")
 
-def text_converter(text):
+def text_converter(text, language):
+  try:
+    response = polly_client.synthesize_speech(
+      OutputFormat='mp3',
+      Text=text,
+      VoiceId='Lea' if language == 'fr' else 'Camila',
+      LanguageCode='fr-FR' if language == 'fr' else 'pt-BR'
+    )
 
-  response = polly_client.synthesize_speech(
-    VoiceId      = voicePolly,
-    Text         = text,
-    OutputFormat = "mp3",
-    LanguageCode = "pt-BR"
-  )
-
-  return response["AudioStream"].read()
+    return response["AudioStream"].read()
+  
+  except Exception as e:
+    print(f"Error text converter: {e}")
+    return None
 
 
-def text_converted_s3_upload(receivedText, AUDIO_NAME, BUCKET_NAME):
+def text_converted_s3_upload(audio, bucket_name, audio_name):
 
     s3_client.put_object(
-        Body   = text_converter(receivedText),
-        Bucket = BUCKET_NAME,
-        Key    = AUDIO_NAME,  # Chave com o nome do objeto
+        Body   = audio,
+        Bucket = bucket_name,
+        Key    = audio_name,  # Chave com o nome do objeto
         ContentType='audio/mpeg'
     )
 
-    url = f"https://{BUCKET_NAME}.s3.amazonaws.com/{AUDIO_NAME}"
+    url = f"https://{bucket_name}.s3.amazonaws.com/{audio_name}"
 
     return url
 
