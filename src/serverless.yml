@@ -19,6 +19,7 @@ provider:
             - s3:GetObject
             - s3:PutObject
             - s3:GetObjectAttributes
+            - translate:TranslateText
           Resource: "*"
         - Effect: Allow
           Action: lambda:InvokeFunction

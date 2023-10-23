@@ -21,8 +21,6 @@ def handlerLexIntentVerifier(event, context):
 
     elif (intent == 'TextAudioTranslaterIntent'):
         invoke_response = client.invoke(FunctionName="final-lex-bot-v1-dev-text_audio_translater", Payload = json.dumps(event))
-        print(invoke_response)
-        print(invoke_response['Payload'])
         payload = json.load(invoke_response['Payload'])
         return payload
     

@@ -250,7 +250,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                         MessageGroupsList = [{
                                             Message = {
                                                 PlainTextMessage = {
-                                                    Value = "Por favor, envie o texto ou áudio a ser traduzido."
+                                                    Value = "Envie o texto ou áudio que deseja traduzir."
                                                 }
                                             }
                                         }]
@@ -319,8 +319,9 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                         ]
                         SlotPriorities = [
                             { Priority = 1, SlotName = "languageConditional" },
-                            { Priority = 2, SlotName = "textOrAudioReceiver" },
-                            { Priority = 3, SlotName = "textOrAudioConditional" }
+                            { Priority = 2, SlotName = "textOrAudioConditional" },
+                            { Priority = 3, SlotName = "textOrAudioReceiver" }
+                            
                         ]
                     },
                     {
@@ -335,7 +336,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                         Slots = [
                             {
                                 Name         = "cepFromUser"
-                                SlotTypeName = "AMAZON.AlphaNumeric" # Recognizes words made up of letters and numbers.
+                                SlotTypeName = "AMAZON.FreeFormInput" # Recognizes words made up of letters and numbers.
                                 ValueElicitationSetting = {
                                     SlotConstraint = "Required"
                                     PromptSpecification = {
