@@ -71,7 +71,6 @@
 ## 1. Objetivo
 
   O ImigraLingo Assist tem como objetivo principal simplificar a vida dos imigrantes de língua francesa no Brasil, oferecendo assistência eficaz na superação de barreiras linguísticas, na integração na sociedade brasileira e na obtenção de informações vitais, desde traduções e localização de serviços até informações confiáveis sobre o processo de imigração. Nosso propósito é tornar a jornada de imigração mais suave e acessível, proporcionando as ferramentas necessárias para uma adaptação bem-sucedida e segura no Brasil.
----
 
 <a id="ancora1-1"></a>
 ### 1.1 Ferramentas Utilizadas
