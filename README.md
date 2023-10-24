@@ -98,23 +98,23 @@
 
 ## 2. Funcionalidades
   
-  1. Extração de Textos em Imagens 📸🔍
+  **1. Extração de Textos em Imagens 📸🔍**
 
   Você encontrou um texto em português que não entende? Não se preocupe! Envie uma imagem com texto em português para o chatbot e receba a tradução em texto ou áudio, em português ou na sua língua nativa.
 
-  2. Tradução de Áudios e Textos 🗣️📜
+  **2. Tradução de Áudios e Textos 🗣️📜**
 
   Comunique-se sem barreiras. Envie textos ou áudios em português ou francês, e deixe o chatbot traduzir para você. Receba as traduções em formato de áudio ou texto.
 
-  3. Locais de Interesse Conforme Região 🌆📻
+  **3. Locais de Interesse Conforme Região 🌆📻**
 
   Informe ao chatbot o CEP da sua região e escolha um local de interesse (posto policial, hospital, shopping, restaurante, etc.). O chatbot fornecerá informações sobre os locais mais próximos, ajudando você a se orientar em sua nova cidade.
 
-  4. Contatos de Emergência 🚨🏥
+  **4. Contatos de Emergência 🚨🏥**
 
   Tenha acesso rápido aos números de emergência do Brasil, incluindo Bombeiro, Polícia e Ambulância, para sua segurança e tranquilidade.
 
-  5. Documentos de Imigração 📄🌐
+  **5. Documentos de Imigração 📄🌐**
 
   Receba informações detalhadas sobre como realizar o processo de imigração no Brasil, com base em documentos oficiais do governo. Esteja preparado e informado durante sua jornada de imigração.
 
