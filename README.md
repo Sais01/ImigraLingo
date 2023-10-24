@@ -52,37 +52,25 @@
 </div>
 
 ---
-
 ---
-
-<div align="center">
-  <h2>📑 Sumário</h2>
-</div>
-
----
-
-### 1. [Propósito](#ancora1)
-   - 1.1 [Ferramentas Utilizadas](#ancora1-1)
-   
-### 2. [Evolução do Projeto](#ancora2)
-   - 2.1 [](#ancora2-1)
-   - 2.2 [](#ancora2-2)
-
-### 3. [Estrutura de Diretórios](#ancora3)
-
-### 4. [Infraestrutura na AWS](#ancora4)
-
-### 5. [Desafios Enfrentados](#ancora5)
-
+## 📖 Sumário
+- [1 - Objetivo](#ancora1)
+  - [1.1 - Tecnologias Utilizadas](#ancora1-1)
+- [2 - Funcionalidades](#ancora2)
+- [3 - Desenvolvimento do Projeto](#ancora3)
+- [4 - Acesso à Aplicação e Como Utilizá-la](#ancora4)
+- [5 - Estrutura de Pastas do Projeto](#ancora5)
+- [6 - Arquitetura AWS](#ancora6)
+- [7 - Dificuldades conhecidas](#ancora7)
+- [8 - Licença](#ancora8)
 
 ---
 
 <a id="ancora1"></a>
-## 1. Propósito
--
 
-  
--
+## 1. Objetivo
+
+  O ImigraLingo Assist tem como objetivo principal simplificar a vida dos imigrantes de língua francesa no Brasil, oferecendo assistência eficaz na superação de barreiras linguísticas, na integração na sociedade brasileira e na obtenção de informações vitais, desde traduções e localização de serviços até informações confiáveis sobre o processo de imigração. Nosso propósito é tornar a jornada de imigração mais suave e acessível, proporcionando as ferramentas necessárias para uma adaptação bem-sucedida e segura no Brasil.
 ---
 
 <a id="ancora1-1"></a>
@@ -90,39 +78,62 @@
 
 <div align="center">
   <img align="center" alt="Python" height="30" src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" />
-    <!-- <img align="center" alt="NodeJS" height="28" width="28" src="https://th.bing.com/th?id=ODLS.3891574d-ed49-4720-9a83-edb0952d05a3&w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2" /> -->
-    <img align="center" alt="Git" height="28" width="42" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg">
-    <img align="center" alt="AWS" height="28" width="42" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/1024px-    Amazon_Web_Services_Logo.svg.png" />
-    <!-- <img align="center" alt="Amplifyer" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/9da5a168cf8194c8ee5ed192a443d563-674375b53bc8ae94f48cfdb5c81e8363.svg" /> -->
-    <img align="center" alt="S3" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/c0828e0381730befd1f7a025057c74fb-43acc0496e64afba82dbc9ab774dc622.svg" />
-    <img align="center" alt="Serverless" height="28" width="42" src="https://assets-global.website-files.com/60acbb950c4d6606963e1fed/611631cd314b2abec6c29ec0_bolt.svg" />
-    <!-- <img align="center" alt="DynamoDB" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/6f419a45e63123b4c16bd679549610f6-87862c68693445999110bbd6a467ce88.svg" /> -->
-    <img align="center" alt="Amazon API Gateway" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/fb0cde6228b21d89ec222b45efec54e7-0856e92285f4e7ed254b2588d1fe1829.svg" />
-    <img align="center" alt="HTML" height="30" src="./docImages/Terraform.png" />
-   
+  <img align="center" alt="Git" height="28" width="42" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg">
+  <img align="center" alt="AWS" height="28" width="42" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/1024px-    Amazon_Web_Services_Logo.svg.png" /
+  <img align="center" alt="S3" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/c0828e0381730befd1f7a025057c74fb-43acc0496e64afba82dbc9ab774dc622.svg" />
+  <img align="center" alt="Serverless" height="28" width="42" src="https://assets-global.website-files.com/60acbb950c4d6606963e1fed/611631cd314b2abec6c29ec0_bolt.svg" />
+  <img align="center" alt="Lambda" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/945f3fc449518a73b9f5f32868db466c-926961f91b072604c42b7f39ce2eaf1c.svg" />
+  <img align="center" alt="Lex" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/16660b27a03cc547adc54a269bc4a69e-7d762d8739de54214018a7d757540c79.svg" />
+  <img align="center" alt="Rekognition" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/b7cb336b98f3c4db02fb13d4d671df5e-37a81abbdae00bac12e1ffcd0776093b.svg" />
+  <img align="center" alt="Polly" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/8ca4245f09e5a6ecf058c15cca9ac9b6-4a6ec5b037b363b8f33064d09d4f40ab.svg" />
+  <img align="center" alt="Translate" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/fc46e26a907870744758b76166150f62-76c22bfd03882310f44da5a6a9590864.svg" />
+  <img align="center" alt="Transcribe" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/762bf9a0fc087fbb4ba021a3cee6edaf-2578b25de7cbb06633f39903ccc90d08.svg" />
+  
 
-
-
-
-    
 </div>
 
 
 ---
 
 <a id="ancora2"></a>
-## 2. Evolução do Projeto
 
-<a id="ancora2-1"></a>
+## 2. Funcionalidades
+  
+  1. Extração de Textos em Imagens 📸🔍
+
+  Você encontrou um texto em português que não entende? Não se preocupe! Envie uma imagem com texto em português para o chatbot e receba a tradução em texto ou áudio, em português ou na sua língua nativa.
+
+  2. Tradução de Áudios e Textos 🗣️📜
+
+  Comunique-se sem barreiras. Envie textos ou áudios em português ou francês, e deixe o chatbot traduzir para você. Receba as traduções em formato de áudio ou texto.
+
+  3. Locais de Interesse Conforme Região 🌆📻
+
+  Informe ao chatbot o CEP da sua região e escolha um local de interesse (posto policial, hospital, shopping, restaurante, etc.). O chatbot fornecerá informações sobre os locais mais próximos, ajudando você a se orientar em sua nova cidade.
+
+  4. Contatos de Emergência 🚨🏥
+
+  Tenha acesso rápido aos números de emergência do Brasil, incluindo Bombeiro, Polícia e Ambulância, para sua segurança e tranquilidade.
+
+  5. Documentos de Imigração 📄🌐
+
+  Receba informações detalhadas sobre como realizar o processo de imigração no Brasil, com base em documentos oficiais do governo. Esteja preparado e informado durante sua jornada de imigração.
+
+<div align="center">
+  <img src="docImages/finalSprintFluxogram.png" alt="angular-logo">
+  <p> Fluxograma das intents
+</div>
+
+<!-- <a id="ancora2-1"></a>
 #### 2.1 
 
-<!-- Detalhes sobre a contrução de v1/vision e resultados aqui -->
+Detalhes sobre a contrução de v1/vision e resultados aqui
   - 
 <a id="ancora2-2"></a>
 <a id="ancora2-1"></a>
 #### 2.2 
 
-<!-- Detalhes sobre a contrução de v2/vision e resultados aqui -->
+Detalhes sobre a contrução de v2/vision e resultados aqui
   - 
 
 <a id="ancora3"></a>
@@ -131,26 +142,27 @@
 
 ***
 
----
+--- -->
 
-<a id="ancora4"></a>
+<a id="ancora6"></a>
 
-## Arquitetura do Bot
+## 6. Arquitetura AWS
 
 O bot terá como foco ajudar imigrantes da lingua francesa a se comunicar com a lingua portuguesa. 
 <div align="center">
   <img src="docImages/finalSprintAWSArch.png" alt="angular-logo">
   <p> Arquitetura AWS
-  <br>
-  <br>
-  <br>
-  <img src="docImages/finalSprintFluxogram.png" alt="angular-logo">
-  <p> Fluxograma das intents
 </div>
 
-## 5. Desafios Enfrentados
+<!-- ## 5. Desafios Enfrentados
 
-<!-- Desafios enfrentados durante o desenvolvimento -->
+Desafios enfrentados durante o desenvolvimento
 
 
----
+--- -->
+
+<a id="ancora8"></a>
+
+# 8 - Licença
+
+Este projeto está licenciado sob a Licença MIT - consulte o [Link](https://mit-license.org/) para obter mais detalhes.
