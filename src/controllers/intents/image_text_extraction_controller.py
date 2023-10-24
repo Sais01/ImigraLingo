@@ -28,7 +28,7 @@ def handle_image_to_text(event, context):
         
         elif text_or_audio_conditional == "audio_fr":
             translate_response = text_translate(text_from_image, "pt", "fr")
-            audio_response = text_converter(text_from_image, "fr")
+            audio_response = text_converter(translate_response, "fr")
             audio_s3_response = text_converted_s3_upload(audio_response, BUCKET_NAME, "teste")
             return prepare_response_text(event, audio_s3_response)
         else:
