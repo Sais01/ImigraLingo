@@ -136,7 +136,7 @@ Detalhes sobre a contrução de v2/vision e resultados aqui
   - 
 
 <a id="ancora3"></a>
-## 3. Estrutura de Diretórios
+## 3. Estrutura de Diretório
 
 
 ***
