@@ -92,6 +92,12 @@ functions:
   text_audio_translater:
     handler: controllers/intents/text_audio_translater_controller.handle_text_audio_translater
 
+  twilio:
+    handler: utils/get_twilio_message.get_twilio_message
+    events:
+      - httpApi:
+          path: /twilio
+          method: post
 plugins:
   - serverless-offline
   - serverless-python-requirements
