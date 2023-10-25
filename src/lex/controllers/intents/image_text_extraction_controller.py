@@ -1,10 +1,20 @@
-from core.config import settings
+from core.config                  import settings
 from services.rekognition_service import extract_text_from_image
-from utils.response_formatters import prepare_response_text
-from services.translate_service import text_translate
-from services.polly_service import text_converter, text_converted_s3_upload
+from utils.response_formatters    import prepare_response_text
+from services.translate_service   import text_translate
+from services.polly_service       import text_converter, text_converted_s3_upload
 
 def handle_image_to_text(event, context):
+    """
+    Extracts text from an image and returns it in the requested format (text or audio).
+
+    Args:
+        event (dict): The input event containing the image name and the desired output format.
+        context (dict): The context of the AWS Lambda function.
+
+    Returns:
+        dict: The response containing the extracted text in the requested format.
+    """
     try:
         BUCKET_NAME = settings.BUCKET_NAME
         
@@ -28,7 +38,7 @@ def handle_image_to_text(event, context):
         
         elif text_or_audio_conditional == "audio_fr":
             translate_response = text_translate(text_from_image, "pt", "fr")
-            audio_response = text_converter(translate_response, "fr")
+            audio_response = text_converter(text_from_image, "fr")
             audio_s3_response = text_converted_s3_upload(audio_response, BUCKET_NAME, "teste")
             return prepare_response_text(event, audio_s3_response)
         else:
@@ -39,4 +49,3 @@ def handle_image_to_text(event, context):
         return prepare_response_text(
             event, f"Erreur lors du traitement de la demande d'achat: {str(e)}"
         )
-

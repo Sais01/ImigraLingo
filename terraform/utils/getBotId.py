@@ -9,7 +9,7 @@ def get_bot_id():
     @return A dictionary with the bot id
     """
     region = "us-east-1"
-    bot_name = "finalSprintBotv1"
+    bot_name = "finalSprintBot"
     lexv2_client = boto3.client('lexv2-models', region_name=region)
 
     try:

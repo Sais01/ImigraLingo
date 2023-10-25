@@ -79,25 +79,22 @@ resources:
 functions:
   lexIntentVerifier:
     handler: router_controller.handlerLexIntentVerifier
-  cep_to_places:
-    handler: controllers/intents/cep_to_places_controller.handle_cep_to_places
 
   image_to_text:
     handler: controllers/intents/image_text_extraction_controller.handle_image_to_text
-    events:
-      - httpApi:
-          path: /testing
-          method: get
 
   text_audio_translater:
     handler: controllers/intents/text_audio_translater_controller.handle_text_audio_translater
 
-  twilio:
-    handler: utils/get_twilio_message.get_twilio_message
-    events:
-      - httpApi:
-          path: /twilio
-          method: post
+  cep_to_places:
+    handler: controllers/intents/cep_to_places_controller.handle_cep_to_places
+
+  emergency_contacts:
+    handler: controllers/intents/emergency_contacts_controller.handle_emergency_contacts
+
+  how_to_make_docs:
+    handler: controllers/intents/how_to_make_docs_controller.handle_how_to_make_docs
+
 plugins:
   - serverless-offline
   - serverless-python-requirements

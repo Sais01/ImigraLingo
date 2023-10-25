@@ -1,0 +1,37 @@
+service: orchestrator-final-lex-bot-v1
+frameworkVersion: '3'
+
+useDotenv: true
+
+provider:
+  name   : aws
+  region : us-east-1 
+  runtime: python3.9
+
+  iam:
+    role:
+      name: role-orchestrator-for-sprint-final
+      statements:
+        - Effect: Allow
+          Action:
+            - s3:GetObject
+            - s3:PutObject
+            - s3:GetObjectAttributes
+          Resource: "*"
+        - Effect: Allow
+          Action: lambda:InvokeFunction
+          Resource: "*"
+
+  # environment:
+
+functions:
+  twilio:
+    handler: utils/get_twilio_message.get_twilio_message
+    events:
+      - httpApi:
+          path: /twilio
+          method: post
+          
+plugins:
+  - serverless-offline
+  - serverless-python-requirements

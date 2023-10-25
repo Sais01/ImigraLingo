@@ -6,8 +6,8 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
         schoolAssistantBot = {
             Type = "AWS::Lex::Bot"
             Properties = {
-                Name                    = "finalSprintBotv1"
-                Description             = "Ajuda imigrantes haitianos/franceses com informações úteis e orientações"
+                Name                    = "finalSprintBot"
+                Description             = "Ajuda imigrantes fracófonos com informações úteis e orientações no Brasil."
                 IdleSessionTTLInSeconds = 300
                 RoleArn                 = aws_iam_role.finalSprintBotIamRoleStackv1.arn
                 AutoBuildBotLocales     = true
@@ -34,17 +34,6 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                         FulfillmentCodeHook = {
                             Enabled = true
                         }
-                        # InitialResponseSetting = {
-                        #     InitialResponse = {
-                        #         MessageGroupsList = [{
-                        #         Message = {
-                        #             PlainTextMessage = {
-                        #                 Value = "Boas vindas ao ImigraLingo, bot de ajuda ao imigrante! O que deseja fazer?"
-                        #             }
-                        #         }
-                        #         }]
-                        #     }
-                        # }
                         SampleUtterances = [
                             { Utterance = "ola" }
                         ]
@@ -56,29 +45,32 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                             InitialResponse = {
                                 MessageGroupsList = [{
                                 Message = {
-                                    ImageResponseCard = {
-                                        Title    = "Opções"
-                                        Subtitle = "Escolha uma das opções abaixo para acionar a ajuda!"
-                                        Buttons  = [{
-                                            "Text": "Como fazer documentos",
-                                            "Value": "HowToMakeDocs"
-                                        },
-                                        {
-                                            "Text": "Contatos de emergência",
-                                            "Value": "EmergencyContacts"
-                                        },
-                                        {
-                                            "Text": "Dicas de localização",
-                                            "Value": "CepToTip"
-                                        },
-                                        {
-                                            "Text": "Tradutor de texto e áudio",
-                                            "Value": "TextAudioTranslater"
-                                        },
-                                        {
-                                            "Text": "Extrator de texto de imagem",
-                                            "Value": "ImageTextExtraction"
-                                        }]
+                                    # ImageResponseCard = {
+                                    #     Title    = "Opções"
+                                    #     Subtitle = "Escolha uma das opções abaixo para acionar a ajuda!"
+                                    #     Buttons  = [{
+                                    #         "Text": "Como fazer documentos",
+                                    #         "Value": "HowToMakeDocs"
+                                    #     },
+                                    #     {
+                                    #         "Text": "Contatos de emergência",
+                                    #         "Value": "EmergencyContacts"
+                                    #     },
+                                    #     {
+                                    #         "Text": "Dicas de localização",
+                                    #         "Value": "CepToTip"
+                                    #     },
+                                    #     {
+                                    #         "Text": "Tradutor de texto e áudio",
+                                    #         "Value": "TextAudioTranslater"
+                                    #     },
+                                    #     {
+                                    #         "Text": "Extrator de texto de imagem",
+                                    #         "Value": "ImageTextExtraction"
+                                    #     }]
+                                    # }
+                                    PlainTextMessage = {
+                                        Value = "Escolha uma das opções abaixo para acionar a ajuda! (Digite o número da opção)\n\n 1. Como Fazer Documentos de Imigração\n 2. Contatos de Emergência\n 3. Locais de Interesse Conforme Região\n 4. Tradutor de Texto e Áudio\n 5. Extrator de Texto em Imagens"
                                     }
                                 }
                                 }]
@@ -99,6 +91,42 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                         ]
                         Slots = [
                             {
+                                Name         = "textOrAudioConditional"
+                                SlotTypeName = "AMAZON.AlphaNumeric" # Recognizes words made up of letters and numbers.
+                                ValueElicitationSetting = {
+                                    SlotConstraint = "Required"
+                                    PromptSpecification = {
+                                        MaxRetries = 1
+                                        MessageGroupsList = [{
+                                            Message = {
+                                                # ImageResponseCard = {
+                                                #     Title = "Você deseja receber o texto extraído da imagem ou um áudio com o texto extraído?"
+                                                #     Buttons = [{
+                                                #         "Text": "Texto em Francês",
+                                                #         "Value": "text_fr"
+                                                #     },
+                                                #     {
+                                                #         "Text": "Áudio em Francês",
+                                                #         "Value": "audio_fr"
+                                                #     },
+                                                #     {
+                                                #         "Text": "Texto em Português",
+                                                #         "Value": "text_pt"
+                                                #     },
+                                                #     {
+                                                #         "Text": "Áudio em Português",
+                                                #         "Value": "audio_pt"
+                                                #     }]
+                                                # }
+                                                PlainTextMessage = {
+                                                    Value = "Você deseja receber o texto extraído da imagem ou um áudio com o texto extraído? (Digite o número da opção)\n\n 1. Texto em Francês\n 2. Áudio em Francês\n 3. Texto em Português\n 4. Áudio em Português"
+                                                }
+                                            }
+                                        }]
+                                    }
+                                }
+                            },
+                            {
                                 Name         = "imgFromUser"
                                 SlotTypeName = "AMAZON.FreeFormInput" # Recognizes strings that consist of any words or characters.
                                 ValueElicitationSetting = {
@@ -112,81 +140,25 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                                 }
                                             }
                                         }]
-                                    },
-                                    SlotCaptureSetting = {
-                                        CodeHook = {
-                                            EnableCodeHookInvocation = true
-                                            IsActive = true
-                                            PostCodeHookSpecification = {
-                                                SuccessResponse = {
-                                                    MessageGroupsList = [{
-                                                        Message = {
-                                                            PlainTextMessage = {
-                                                                Value = "Essa mensagem não é usada."
-                                                            }
-                                                        }
-                                                    }]
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            {
-                                Name         = "textOrAudioConditional"
-                                SlotTypeName = "AMAZON.AlphaNumeric" # Recognizes words made up of letters and numbers.
-                                ValueElicitationSetting = {
-                                    SlotConstraint = "Required"
-                                    PromptSpecification = {
-                                        MaxRetries = 1
-                                        MessageGroupsList = [{
-                                            Message = {
-                                                ImageResponseCard = {
-                                                    Title = "Você deseja receber o texto extraído da imagem ou um áudio com o texto extraído?"
-                                                    Buttons = [{
-                                                        "Text": "Texto em Francês",
-                                                        "Value": "text_fr"
-                                                    },
-                                                    {
-                                                        "Text": "Áudio em Francês",
-                                                        "Value": "audio_fr"
-                                                    },
-                                                    {
-                                                        "Text": "Texto em Português",
-                                                        "Value": "text_pt"
-                                                    },
-                                                    {
-                                                        "Text": "Áudio em Português",
-                                                        "Value": "audio_pt"
-                                                    }]
-                                                }
-                                            }
-                                        }]
-                                    },
-                                    SlotCaptureSetting = {
-                                        CodeHook = {
-                                            EnableCodeHookInvocation = true
-                                            IsActive = true
-                                            PostCodeHookSpecification = {
-                                                SuccessResponse = {
-                                                    MessageGroupsList = [{
-                                                        Message = {
-                                                            PlainTextMessage = {
-                                                                Value = "Essa mensagem não é usada."
-                                                            }
-                                                        }
-                                                    }]
-                                                }
-                                            }
-                                        }
                                     }
                                 }
                             }
                         ]
                         SlotPriorities = [
-                            { Priority = 1, SlotName = "imgFromUser" },
-                            { Priority = 2, SlotName = "textOrAudioConditional" }
+                            { Priority = 1, SlotName = "textOrAudioConditional" },
+                            { Priority = 2, SlotName = "imgFromUser" }
                         ]
+                        IntentClosingSetting = {
+                            ClosingResponse = {
+                                MessageGroupsList = [{
+                                    Message = {
+                                        PlainTextMessage = {
+                                            Value = "Obrigado por utilizar o nosso serviço!"
+                                        }
+                                    }
+                                }]
+                            }
+                        }
                     },
                     {
                         Name = "TextAudioTranslaterIntent"
@@ -199,6 +171,34 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                         ]
                         Slots = [
                             {
+                                Name          = "textOrAudioUserInput"
+                                SlotTypeName  = "AMAZON.AlphaNumeric" # Recognizes words made up of letters and numbers.
+                                ValueElicitationSetting = {
+                                    SlotConstraint = "Required"
+                                    PromptSpecification = {
+                                        MaxRetries = 1
+                                        MessageGroupsList = [{
+                                            Message = {
+                                                # ImageResponseCard = {
+                                                #     Title = "Você deseja traduzir um texto ou um áudio do português -> francês ou francês -> português?"
+                                                #     Buttons = [{
+                                                #         "Text": "Português para o francês",
+                                                #         "Value": "ptToFr"
+                                                #     },
+                                                #     {
+                                                #         "Text": "Francês para o português",
+                                                #         "Value": "frToPt"
+                                                #     }]
+                                                # }
+                                                PlainTextMessage = {
+                                                    Value = "Você quer traduzir um áudio ou um texto? (Digite o número da opção)\n\n 1. Áudio\n 2. Texto"
+                                                }
+                                            }
+                                        }]
+                                    }
+                                }
+                            },
+                            {
                                 Name          = "languageConditional"
                                 SlotTypeName  = "AMAZON.AlphaNumeric" # Recognizes words made up of letters and numbers.
                                 ValueElicitationSetting = {
@@ -207,36 +207,50 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                         MaxRetries = 1
                                         MessageGroupsList = [{
                                             Message = {
-                                                ImageResponseCard = {
-                                                    Title = "Você deseja traduzir um texto ou um áudio do português -> francês ou francês -> português?"
-                                                    Buttons = [{
-                                                        "Text": "Português para o francês",
-                                                        "Value": "ptToFr"
-                                                    },
-                                                    {
-                                                        "Text": "Francês para o português",
-                                                        "Value": "frToPt"
-                                                    }]
+                                                # ImageResponseCard = {
+                                                #     Title = "Você deseja traduzir um texto ou um áudio do português -> francês ou francês -> português?"
+                                                #     Buttons = [{
+                                                #         "Text": "Português para o francês",
+                                                #         "Value": "ptToFr"
+                                                #     },
+                                                #     {
+                                                #         "Text": "Francês para o português",
+                                                #         "Value": "frToPt"
+                                                #     }]
+                                                # }
+                                                PlainTextMessage = {
+                                                    Value = "Você deseja traduzir do português -> francês ou francês -> português? (Digite o número da opção)\n\n 1. Português para o francês\n 2. Francês para o português"
                                                 }
                                             }
                                         }]
-                                    },
-                                    SlotCaptureSetting = {
-                                        CodeHook = {
-                                            EnableCodeHookInvocation = true
-                                            IsActive = true
-                                            PostCodeHookSpecification = {
-                                                SuccessResponse = {
-                                                    MessageGroupsList = [{
-                                                        Message = {
-                                                            PlainTextMessage = {
-                                                                Value = "Essa mensagem não é usada."
-                                                            }
-                                                        }
-                                                    }]
+                                    }
+                                }
+                            },
+                            {
+                                Name         = "textOrAudioConditional"
+                                SlotTypeName = "AMAZON.AlphaNumeric" # Recognizes words made up of letters and numbers.
+                                ValueElicitationSetting = {
+                                    SlotConstraint = "Required"
+                                    PromptSpecification = {
+                                        MaxRetries = 1
+                                        MessageGroupsList = [{
+                                            Message = {
+                                                # ImageResponseCard = {
+                                                #     Title = "Você deseja receber o texto ou áudio enviado como um áudio ou como texto?"
+                                                #     Buttons = [{
+                                                #         "Text": "Como texto",
+                                                #         "Value": "text"
+                                                #     },
+                                                #     {
+                                                #         "Text": "Como áudio",
+                                                #         "Value": "audio"
+                                                #     }]
+                                                # }
+                                                PlainTextMessage = {
+                                                    Value = "Você deseja receber o texto ou áudio enviado como um áudio ou como texto? (Digite o número da opção)\n\n 1. Como texto\n 2. Como áudio"
                                                 }
                                             }
-                                        }
+                                        }]
                                     }
                                 }
                             },
@@ -254,74 +268,15 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                                 }
                                             }
                                         }]
-                                    },
-                                    SlotCaptureSetting = {
-                                        CodeHook = {
-                                            EnableCodeHookInvocation = true
-                                            IsActive = true
-                                            PostCodeHookSpecification = {
-                                                SuccessResponse = {
-                                                    MessageGroupsList = [{
-                                                        Message = {
-                                                            PlainTextMessage = {
-                                                                Value = "Essa mensagem não é usada."
-                                                            }
-                                                        }
-                                                    }]
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            {
-                                Name         = "textOrAudioConditional"
-                                SlotTypeName = "AMAZON.AlphaNumeric" # Recognizes words made up of letters and numbers.
-                                ValueElicitationSetting = {
-                                    SlotConstraint = "Required"
-                                    PromptSpecification = {
-                                        MaxRetries = 1
-                                        MessageGroupsList = [{
-                                            Message = {
-                                                ImageResponseCard = {
-                                                    Title = "Você deseja receber o texto ou áudio enviado como um áudio ou como texto?"
-                                                    Buttons = [{
-                                                        "Text": "Como texto",
-                                                        "Value": "text"
-                                                    },
-                                                    {
-                                                        "Text": "Como áudio",
-                                                        "Value": "audio"
-                                                    }]
-                                                }
-                                            }
-                                        }]
-                                    },
-                                    SlotCaptureSetting = {
-                                        CodeHook = {
-                                            EnableCodeHookInvocation = true
-                                            IsActive = true
-                                            PostCodeHookSpecification = {
-                                                SuccessResponse = {
-                                                    MessageGroupsList = [{
-                                                        Message = {
-                                                            PlainTextMessage = {
-                                                                Value = "Essa mensagem não é usada."
-                                                            }
-                                                        }
-                                                    }]
-                                                }
-                                            }
-                                        }
                                     }
                                 }
                             }
                         ]
                         SlotPriorities = [
-                            { Priority = 1, SlotName = "languageConditional" },
-                            { Priority = 2, SlotName = "textOrAudioConditional" },
-                            { Priority = 3, SlotName = "textOrAudioReceiver" }
-                            
+                            { Priority = 1, SlotName = "textOrAudioUserInput" },
+                            { Priority = 2, SlotName = "languageConditional" },
+                            { Priority = 3, SlotName = "textOrAudioConditional" },
+                            { Priority = 4, SlotName = "textOrAudioReceiver" }
                         ]
                     },
                     {
@@ -346,25 +301,13 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                                 PlainTextMessage = {
                                                     Value = "Por favor, envie o cep da sua localização (apenas números)."
                                                 }
-                                            }
-                                        }]
-                                    },
-                                    SlotCaptureSetting = {
-                                        CodeHook = {
-                                            EnableCodeHookInvocation = true
-                                            IsActive = true
-                                            PostCodeHookSpecification = {
-                                                SuccessResponse = {
-                                                    MessageGroupsList = [{
-                                                        Message = {
-                                                            PlainTextMessage = {
-                                                                Value = "Essa mensagem não é usada."
-                                                            }
-                                                        }
-                                                    }]
+                                            },
+                                            Message = {
+                                                PlainTextMessage = {
+                                                    Value = "Caso não saiba o seu cep, você pode consultá-lo em: https://buscacepinter.correios.com.br/app/endereco/index.php."
                                                 }
                                             }
-                                        }
+                                        }]
                                     }
                                 }
                             },
@@ -377,40 +320,26 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                         MaxRetries = 1
                                         MessageGroupsList = [{
                                             Message = {
-                                                ImageResponseCard = {
-                                                    Title = "Qual ponto de interesse você deseja saber a localização mais próxima?"
-                                                    Buttons = [{
-                                                        "Text": "Hospital",
-                                                        "Value": "hospital"
-                                                    },
-                                                    {
-                                                        "Text": "Policia",
-                                                        "Value": "police"
-                                                    },
-                                                    {
-                                                        "Text": "Restaurante",
-                                                        "Value": "restaurant"
-                                                    }]
+                                                # ImageResponseCard = {
+                                                #     Title = "Qual ponto de interesse você deseja saber a localização mais próxima?"
+                                                #     Buttons = [{
+                                                #         "Text": "Hospital",
+                                                #         "Value": "hospital"
+                                                #     },
+                                                #     {
+                                                #         "Text": "Policia",
+                                                #         "Value": "police"
+                                                #     },
+                                                #     {
+                                                #         "Text": "Restaurante",
+                                                #         "Value": "restaurant"
+                                                #     }]
+                                                # }
+                                                PlainTextMessage = {
+                                                    Value = "Qual ponto de interesse você deseja saber a localização mais próxima? (Digite o número da opção)\n\n 1. Hospital\n 2. Policia\n 3. Restaurante"
                                                 }
                                             }
                                         }]
-                                    },
-                                    SlotCaptureSetting = {
-                                        CodeHook = {
-                                            EnableCodeHookInvocation = true
-                                            IsActive = true
-                                            PostCodeHookSpecification = {
-                                                SuccessResponse = {
-                                                    MessageGroupsList = [{
-                                                        Message = {
-                                                            PlainTextMessage = {
-                                                                Value = "Essa mensagem não é usada."
-                                                            }
-                                                        }
-                                                    }]
-                                                }
-                                            }
-                                        }
                                     }
                                 }
                             }
@@ -439,40 +368,26 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                         MaxRetries = 1
                                         MessageGroupsList = [{
                                             Message = {
-                                                ImageResponseCard = {
-                                                    Title = "Qual contato de emergência você deseja?"
-                                                    Buttons = [{
-                                                        "Text": "Ambulância",
-                                                        "Value": "ambulancia"
-                                                    },
-                                                    {
-                                                        "Text": "Policia",
-                                                        "Value": "policia"
-                                                    },
-                                                    {
-                                                        "Text": "Bombeiros",
-                                                        "Value": "bombeiros"
-                                                    }]
+                                                # ImageResponseCard = {
+                                                #     Title = "Qual contato de emergência você deseja?"
+                                                #     Buttons = [{
+                                                #         "Text": "Ambulância",
+                                                #         "Value": "ambulancia"
+                                                #     },
+                                                #     {
+                                                #         "Text": "Policia",
+                                                #         "Value": "policia"
+                                                #     },
+                                                #     {
+                                                #         "Text": "Bombeiros",
+                                                #         "Value": "bombeiros"
+                                                #     }]
+                                                # }
+                                                PlainTextMessage = {
+                                                    Value = "Qual contato de emergência você deseja? (Digite o número da opção)\n\n 1. Ambulância\n 2. Policia\n 3. Bombeiros"
                                                 }
                                             }
                                         }]
-                                    },
-                                    SlotCaptureSetting = {
-                                        CodeHook = {
-                                            EnableCodeHookInvocation = true
-                                            IsActive = true
-                                            PostCodeHookSpecification = {
-                                                SuccessResponse = {
-                                                    MessageGroupsList = [{
-                                                        Message = {
-                                                            PlainTextMessage = {
-                                                                Value = "Essa mensagem não é usada."
-                                                            }
-                                                        }
-                                                    }]
-                                                }
-                                            }
-                                        }
                                     }
                                 }
                             }

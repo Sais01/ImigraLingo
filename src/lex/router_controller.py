@@ -31,19 +31,13 @@ def handlerLexIntentVerifier(event, context):
         return payload
 
     elif (intent == 'EmergencyContactsIntent'):
-        emergencyContact = event['sessionState']['intent']['slots']['emergencyContact']
-
-        if (emergencyContact != None):
-            if (emergencyContact['value']['originalValue'] == 'ambulancia'):
-                return prepare_response_text(event, "emergencyContacts concluida, usuario receberá ambulancia")
-            if (emergencyContact['value']['originalValue'] == 'policia'):
-                return prepare_response_text(event, "emergencyContacts concluida, usuario receberá policia")
-            if (emergencyContact['value']['originalValue'] == 'bombeiros'):
-                return prepare_response_text(event, "emergencyContacts concluida, usuario receberá bombeiros")
-            
-        return prepare_response_elicitSlot(event)
+        invoke_response = client.invoke(FunctionName="final-lex-bot-v1-dev-emergency_contacts", Payload = json.dumps(event))
+        print(invoke_response)
+        payload = json.load(invoke_response['Payload'])
+        return payload
     
     elif (intent == 'HowToMakeDocsIntent'):
-        link     = "https://encurtador.com.br/nqswz"
-        response = f"Você pode encontrar todas as informações necessárias para a emissão de documentos no link: {link}"
-        return prepare_response_text(event, response)
+        invoke_response = client.invoke(FunctionName="final-lex-bot-v1-dev-how_to_make_docs", Payload = json.dumps(event))
+        print(invoke_response)
+        payload = json.load(invoke_response['Payload'])
+        return payload
