@@ -1,36 +1,47 @@
 import boto3
+import json
+import uuid
 
-def audio_to_text(audio, language_code):
+def audio_to_text(audio_name, language, bucket_name):
   try:
-    # Configure the Amazon Transcribe client
-    transcribe_client = boto3.client('transcribe', region_name='us-east-1')
+    transcribe_client = boto3.client('transcribe')
+    job_name = str(uuid.uuid4())
+    audio_s3_path = f's3://{bucket_name}/{audio_name}'
 
-    # Perform audio-to-text conversion
-    response = transcribe_client.start_transcription_job(
-      TranscriptionJobName='audio-to-text-job',
-      LanguageCode=language_code,
-      MediaFormat='audio/wav',  # Correct format of audio
-      Media={
-        'MediaFileUri': audio  # URL of audio file in AWS S3 or local path
-      },
-      OutputBucketName='your-s3-bucket'  # Name of S3 bucket where the result will be stored
-    )
+    # Define transcription job settings
+    settings = {
+        'TranscriptionJobName': job_name,
+        'LanguageCode': language,
+        'MediaFormat': 'mp3', 
+        'Media': {'MediaFileUri': audio_s3_path},
+        'OutputBucketName': bucket_name
+    }
 
-    # Wait until the transcription job is complete
-    job_name = response['TranscriptionJob']['TranscriptionJobName']
-    transcribe_client.get_waiter('transcription_job_completed').wait(TranscriptionJobName=job_name)
+    # Start the transcription job
+    transcribe_client.start_transcription_job(**settings)
 
-    # Retrieve the transcription result
-    result_uri = response['TranscriptionJob']['Transcript']['TranscriptFileUri']
+    # Wait until the transcription job is completed
+    while True:
+        response = transcribe_client.get_transcription_job(TranscriptionJobName=job_name)
+        status = response['TranscriptionJob']['TranscriptionJobStatus']
+        if status in ['COMPLETED', 'FAILED']:
+            break
 
-    # Download the transcription file
-    s3 = boto3.client('s3')
-    result = s3.get_object(Bucket='your-s3-bucket', Key=result_uri[len('s3://'):])
-    text = result['Body'].read().decode('utf-8')
+    # Check if transcription was completed successfully
+    if status == 'COMPLETED':
+        result_transcription = boto3.client('s3').get_object(Bucket=bucket_name, Key=f'{job_name}.json')
 
-    return text
+        transcribed_text = result_transcription['Body'].read()
+        data = json.loads(transcribed_text)
+
+        transcript = data['results']['transcripts'][0]['transcript']
+        print(transcript)
+
+        return transcript
+    else:
+        return None
 
   except Exception as e:
-    # Capture any exception that occurs and print the error message
     print(f"An error occurred: {str(e)}")
-    return None  # You can choose how to handle the error, in this case, we return None
+    return None
+

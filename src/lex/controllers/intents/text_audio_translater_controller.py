@@ -6,33 +6,49 @@ from utils.response_formatters   import prepare_response_text
 
 def handle_text_audio_translater(event, context):
   try:
-    BUCKET_NAME = settings.BUCKET_NAME
+    bucket_name = settings.BUCKET_NAME
 
-    slots                      = event['interpretations'][0]['intent']['slots']
-    userLanguageConditional    = slots["languageConditional"]["value"]["originalValue"]
-    userTextOrAudioReceiver    = slots["textOrAudioReceiver"]["value"]["originalValue"]
-    userTextOrAudioConditional = slots["textOrAudioConditional"]["value"]["originalValue"]
+    slots                          = event['interpretations'][0]['intent']['slots']
 
-    if (userLanguageConditional == "ptToFr"):
-      textOrAudioTranslated = text_translate(userTextOrAudioReceiver, "pt", "fr")
+    text_or_audio_user_input       = slots["textOrAudioUserInput"]["value"]["originalValue"]
+    user_language_conditional      = slots["languageConditional"]["value"]["originalValue"]
+    user_text_or_audio_receiver    = slots["textOrAudioReceiver"]["value"]["originalValue"]
+    user_text_or_audio_conditional = slots["textOrAudioConditional"]["value"]["originalValue"]
 
-      if (userTextOrAudioConditional == "text"):
-        return prepare_response_text(event, textOrAudioTranslated)
+    if (user_language_conditional == "ptToFr"):
+      language = "pt-BR"
+      if (text_or_audio_user_input == "audio"):
+        text_to_translate = audio_to_text(user_text_or_audio_receiver, language, bucket_name)
+      else:
+        text_to_translate = user_text_or_audio_receiver
+    else:
+      language = "fr-FR"
+      if (text_or_audio_user_input == "audio"):
+        text_to_translate = audio_to_text(user_text_or_audio_receiver, language, bucket_name)
+      else:
+        text_to_translate = user_text_or_audio_receiver
+
+
+    if (user_language_conditional == "ptToFr"):
+      text_or_audio_translated = text_translate(text_to_translate, "pt", "fr")
+
+      if (user_text_or_audio_conditional == "text"):
+        return prepare_response_text(event, text_or_audio_translated)
       
-      if (userTextOrAudioConditional == "audio"):
-        audio_response = text_converter(textOrAudioTranslated, "fr")
-        audio_s3_response = text_converted_s3_upload(audio_response, BUCKET_NAME, "testeAudioTranslate")
+      if (user_text_or_audio_conditional == "audio"):
+        audio_response = text_converter(text_or_audio_translated, "fr")
+        audio_s3_response = text_converted_s3_upload(audio_response, bucket_name, "testeAudioTranslate")
         return prepare_response_text(event, audio_s3_response)
 
-    elif (userLanguageConditional == "frToPt"):
-      textOrAudioTranslated = text_translate(userTextOrAudioReceiver, "fr", "pt")
+    elif (user_language_conditional == "frToPt"):
+      text_or_audio_translated = text_translate(text_to_translate, "fr", "pt")
 
-      if (userTextOrAudioConditional == "text"):
-        return prepare_response_text(event, textOrAudioTranslated)
+      if (user_text_or_audio_conditional == "text"):
+        return prepare_response_text(event, text_or_audio_translated)
         
-      elif (userTextOrAudioConditional == "audio"):
-        audio_response = text_converter(textOrAudioTranslated, "pt")
-        audio_s3_response = text_converted_s3_upload(audio_response, BUCKET_NAME, "testeAudioTranslate")
+      elif (user_text_or_audio_conditional == "audio"):
+        audio_response = text_converter(text_or_audio_translated, "pt")
+        audio_s3_response = text_converted_s3_upload(audio_response, bucket_name, "testeAudioTranslate")
         return prepare_response_text(event, audio_s3_response)
         
   except Exception as e:

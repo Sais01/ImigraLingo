@@ -7,6 +7,7 @@ provider:
   name   : aws
   region : us-east-1 
   runtime: python3.9
+  timeout: 120
 
   iam:
     role:
@@ -20,6 +21,8 @@ provider:
             - s3:PutObject
             - s3:GetObjectAttributes
             - translate:TranslateText
+            - transcribe:StartTranscriptionJob
+            - transcribe:GetTranscriptionJob
           Resource: "*"
         - Effect: Allow
           Action: lambda:InvokeFunction
