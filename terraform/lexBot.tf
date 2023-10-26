@@ -256,7 +256,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                             },
                             {
                                 Name         = "textOrAudioReceiver"
-                                SlotTypeName = "AMAZON.AlphaNumeric" # Recognizes words made up of letters and numbers.
+                                SlotTypeName = "AMAZON.FreeFormInput" # Recognizes words made up of letters and numbers.
                                 ValueElicitationSetting = {
                                     SlotConstraint = "Required"
                                     PromptSpecification = {
@@ -291,7 +291,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                         Slots = [
                             {
                                 Name         = "cepFromUser"
-                                SlotTypeName = "AMAZON.FreeFormInput" # Recognizes words made up of letters and numbers.
+                                SlotTypeName = "AMAZON.AlphaNumeric" # Recognizes words made up of letters and numbers.
                                 ValueElicitationSetting = {
                                     SlotConstraint = "Required"
                                     PromptSpecification = {
