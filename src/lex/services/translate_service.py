@@ -1,8 +1,21 @@
 import boto3
 
-def text_translate(text, source_language, target_language):
+def text_translate(text: str, source_language: str, target_language: str) -> str:
+  """
+  Translates the given text from the source language to the target language using AWS Translate service.
+
+  Args:
+    text (str): The text to be translated.
+    source_language (str): The language code of the source language.
+    target_language (str): The language code of the target language.
+
+  Returns:
+    str: The translated text.
+
+  Raises:
+    Exception: If there is an error while translating the text.
+  """
   try:
-    # Configure the Amazon Translate client
     translate_client = boto3.client('translate', region_name='us-east-1')
 
     # Perform the translation
@@ -16,11 +29,7 @@ def text_translate(text, source_language, target_language):
     translated_text = result['TranslatedText']
 
     return translated_text
-  
-  except Exception as e:
-    # Handle exceptions here
-    print(e)
-    return None
 
-# if __name__ == "__main__":
-#   print(text_translate("batata", "pt", "fr"))
+  except Exception as e:
+    print(f"Error text translater: {e}")
+    return None

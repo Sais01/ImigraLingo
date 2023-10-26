@@ -31,11 +31,11 @@ def handle_text_audio_translater(event, context):
     if user_language_conditional == "ptToFr":
       from_lang_translate_and_polly = "pt"
       to_lang_translate_and_polly   = "fr"
-      language_audio_transcribe = "pt-BR"
+      language_audio_transcribe     = "pt-BR"
     else:
       from_lang_translate_and_polly = "fr"
-      to_lang_translate_and_polly = "pt"
-      language_audio_transcribe = "fr-FR"
+      to_lang_translate_and_polly   = "pt"
+      language_audio_transcribe     = "fr-FR"
 
     
     if (text_or_audio_user_input == "audio"):
@@ -43,18 +43,19 @@ def handle_text_audio_translater(event, context):
     else:
       text_to_translate = user_text_or_audio_receiver
 
-
     text_or_audio_translated = text_translate(text_to_translate, from_lang_translate_and_polly, to_lang_translate_and_polly)
 
     if (user_text_or_audio_conditional == "text"):
       return prepare_response_text(event, text_or_audio_translated)
     else:
-      audio_response = text_converter(text_or_audio_translated, to_lang_translate_and_polly)
+      audio_response    = text_converter(text_or_audio_translated, to_lang_translate_and_polly)
       audio_s3_response = text_converted_s3_upload(audio_response, bucket_name, str(uuid.uuid4()))
+
       return prepare_response_text(event, audio_s3_response)
         
   except Exception as e:
     print(f"Error in image_text_extraction_controller: {e}")
+
     return prepare_response_text(
       event, f"Erreur lors du traitement de la demande d'achat: {str(e)}"
     )

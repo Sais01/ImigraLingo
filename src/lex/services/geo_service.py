@@ -14,16 +14,18 @@ def cep_to_location(cep):
         Returns None if the request to ViaCEP fails.
   """
   VIA_CEP_BASE_URL = settings.VIA_CEP_BASE_URL
-  url = f"{VIA_CEP_BASE_URL}/ws/{cep}/json/"
+  url              = f"{VIA_CEP_BASE_URL}/ws/{cep}/json/"
 
   try:
     response = requests.get(url)
-    data = response.json()
-    response =f"{data['logradouro']}, {data['localidade']} - {data['uf']}, Brasil"
+    data     = response.json()
+    response = f"{data['logradouro']}, {data['localidade']} - {data['uf']}, Brasil"
+
     return response
   
   except Exception as e:
     print(f"Error in ViaCEP request: {e}")
+
     return None
 
 
@@ -42,18 +44,21 @@ def location_to_coordinates(address):
 
   try:
     geocoder = OpenCageGeocode(API_KEY_OPENCAGE_GEOCODE)
-    results = geocoder.geocode(address)
+    results  = geocoder.geocode(address)
 
     if results and len(results) > 0:
       first_result = results[0]
+
       lat = first_result['geometry']['lat']
       lon = first_result['geometry']['lng']
+
       return lat, lon
     else:
       return None, None
 
   except Exception as e:
     print(f"Error in OpenCage Geocode request: {e}")
+
     return None, None
 
 
@@ -70,36 +75,36 @@ def places_by_coordinates(lat, lon, place_type):
     str: A string containing information about the places found.
       Returns "Aucun endroit trouvé à proximité." if no places are found.
   """
-  OVERPASS_API_BASE_URL = settings.OVERPASS_API_BASE_URL
+  OVERPASS_API_BASE_URL  = settings.OVERPASS_API_BASE_URL
   OPENSTREETMAP_BASE_URL = settings.OPENSTREETMAP_BASE_URL
-  AROUND_SEARCH_PLACES = settings.AROUND_SEARCH_PLACES
-  NUMBER_OF_PLACES  = int(settings.NUMBER_OF_PLACES)
+  AROUND_SEARCH_PLACES   = settings.AROUND_SEARCH_PLACES
+  NUMBER_OF_PLACES       = int(settings.NUMBER_OF_PLACES)
   
   query = f'[out:json];node(around:{AROUND_SEARCH_PLACES},{lat},{lon})["amenity"="{place_type}"];out;'
-  url = f"{OVERPASS_API_BASE_URL}/api/interpreter?data={query}"
+  url   = f"{OVERPASS_API_BASE_URL}/api/interpreter?data={query}"
 
   try:
     response = requests.get(url)
-    data = response.json()
+    data     = response.json()
 
     if data and "elements" in data:
       results = data["elements"]
-      places = []
+      places  = []
       for i, place in enumerate(results[:NUMBER_OF_PLACES], start=1):
         place_infos = place.get("tags", {})
-        place_name = place_infos.get("name", "Nom non disponible")
+        place_name  = place_infos.get("name", "Nom non disponible")
 
-        lat = place["lat"]
-        lon = place["lon"]
-        maps_link = f"{OPENSTREETMAP_BASE_URL}/?mlat={lat}&mlon={lon}#map=16/{lat}/{lon}"
-        place_info = f"{i}. Nom: {place_name}\n Lien sur Maps: {maps_link}\n"
+        lat         = place["lat"]
+        lon         = place["lon"]
+        maps_link   = f"{OPENSTREETMAP_BASE_URL}/?mlat={lat}&mlon={lon}#map=16/{lat}/{lon}"
+        place_info  = f"{i}. Nom: {place_name}\n Lien sur Maps: {maps_link}\n"
         places.append(place_info)
+
       return "\n".join(places)
     else:
       return "Aucun endroit trouvé à proximité."
   
   except Exception as e:
     print(f"Error in Overpass API request: {e}")
+
     return None
-
-

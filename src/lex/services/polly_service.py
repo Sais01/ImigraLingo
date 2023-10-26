@@ -1,77 +1,56 @@
-from datetime import datetime
-# from core.config import settings
-# import json
 import boto3
 
 s3_client    = boto3.client("s3")
 polly_client = boto3.client("polly")
 
 def text_converter(text, language):
+  """
+  Converts text to speech using Amazon Polly service.
+
+  Args:
+  text (str): The text to be converted to speech.
+  language (str): The language of the text. Can be 'fr' for French or 'pt' for Portuguese.
+
+  Returns:
+  bytes: The audio stream of the synthesized speech in mp3 format.
+
+  """
   try:
     response = polly_client.synthesize_speech(
-      OutputFormat='mp3',
-      Text=text,
-      VoiceId='Lea' if language == 'fr' else 'Camila',
-      LanguageCode='fr-FR' if language == 'fr' else 'pt-BR'
+      OutputFormat = 'mp3',
+      Text         = text,
+      VoiceId      = 'Lea' if language == 'fr' else 'Camila',
+      LanguageCode = 'fr-FR' if language == 'fr' else 'pt-BR'
     )
 
     return response["AudioStream"].read()
   
   except Exception as e:
     print(f"Error text converter: {e}")
+
     return None
 
 
 def text_converted_s3_upload(audio, bucket_name, audio_name):
+  """
+  Uploads an audio file to an S3 bucket and returns the URL of the uploaded file.
 
-    s3_client.put_object(
-        Body   = audio,
-        Bucket = bucket_name,
-        Key    = audio_name,  # Chave com o nome do objeto
-        ContentType='audio/mpeg'
-    )
+  Args:
+    audio (bytes): The audio file to be uploaded.
+    bucket_name (str): The name of the S3 bucket to upload the file to.
+    audio_name (str): The name of the audio file to be uploaded.
 
-    url = f"https://{bucket_name}.s3.amazonaws.com/{audio_name}"
+  Returns:
+    str: The URL of the uploaded audio file.
+  """
 
-    return url
+  s3_client.put_object(
+    Body        = audio,
+    Bucket      = bucket_name,
+    Key         = audio_name,
+    ContentType = 'audio/mpeg'
+  )
 
-
-# def tts(event, context):
-#     try:
-#         # Recebe o body da requisição
-#         body = json.loads(event["body"])
-
-#         # Recebe a frase e a data de criação
-#         received_phrase = body["phrase"]
-#         created_time = datetime.now().strftime("%d/%m/%Y-%H:%M:%S")
-
-#         # Chama a função para o upload do audio no S3
-#         audio_s3 = text_converted_s3_upload(received_phrase, created_time)
-
-#         response_body = {
-#             "received_phrase": received_phrase,
-#             "url_to_audio": audio_s3,
-#             "created_audio": created_time,
-#         }
-
-#         response = {"statusCode": 200,
-#                     "body": json.dumps(response_body),
-#                     "headers": {
-#                         "Access-Control-Allow-Origin": "*",
-#                         "Content-Type": "application/json"
-#                     }}
-
-#         return response
-#     except Exception as e:
-#         response = {"statusCode": 500,
-#                     "body": json.dumps(f"Error: {e}"),
-#                     "headers": {
-#                         "Access-Control-Allow-Origin": "*",
-#                         "Content-Type": "application/json"
-#                     }}
-#         return response
-    
-# if __name__ == "__main__":
-#   texto = "Olá, tudo bem?"
-#   print(texto)
-#   print(text_converted_s3_upload(texto, "teste.mp3", "finallexbotv1"))
+  url = f"https://{bucket_name}.s3.amazonaws.com/{audio_name}"
+  
+  return url

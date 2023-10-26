@@ -15,9 +15,9 @@ def handle_cep_to_places(event, context):
     str: A response text containing nearby places of the specified type, or an error message if the CEP is invalid
     or the address cannot be found.
   """
-def handle_cep_to_places(event, context):
   try:
     slots      = event['interpretations'][0]['intent']['slots']
+    
     cep        = slots['cepFromUser']['value']['originalValue']
     place_type = slots['pointsOfInterest']['value']['originalValue']
 
@@ -26,10 +26,12 @@ def handle_cep_to_places(event, context):
     if address:
       lat, lon = location_to_coordinates(address)
       response = places_by_coordinates(lat, lon, place_type)
+
       return prepare_response_text(event, response)
     else:
       return prepare_response_text(event, "Adresse non trouvée.")
     
   except Exception as e:
     print(f"Error in cep_to_places_controller: {e}")
+    
     return prepare_response_text(event, f"Erreur lors du traitement de la demande d'achat: {str(e)}")
