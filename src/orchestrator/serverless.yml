@@ -22,11 +22,16 @@ provider:
           Action: lambda:InvokeFunction
           Resource: "*"
 
-  # environment:
+  environment:
+    TWILIO_WHATS_FROM: ${env:TWILIO_WHATS_FROM}
+    TWILIO_WHATS_TO: ${env:TWILIO_WHATS_TO}
+    TWILIO_ID: ${env:TWILIO_ID}
+    TWILIO_TOKEN: ${env:TWILIO_TOKEN}
+    BUCKET_NAME: ${env:BUCKET_NAME}
 
 functions:
   twilio:
-    handler: utils/get_twilio_message.get_twilio_message
+    handler: controllers/twilio_handler.twilio_handler
     events:
       - httpApi:
           path: /twilio
