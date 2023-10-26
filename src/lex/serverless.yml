@@ -37,6 +37,13 @@ provider:
     OPENSTREETMAP_BASE_URL: ${env:OPENSTREETMAP_BASE_URL}
     BUCKET_NAME: ${env:BUCKET_NAME}
     IMAGE_NAME: ${env:IMAGE_NAME}
+    AUDIO_NAME: ${env:AUDIO_NAME}
+    IntroductionIntent: ${env:IntroductionIntent}
+    ImageTextExtractionIntent: ${env:ImageTextExtractionIntent}
+    TextAudioTranslaterIntent: ${env:TextAudioTranslaterIntent}
+    CepToTipIntent: ${env:CepToTipIntent}
+    EmergencyContactsIntent: ${env:EmergencyContactsIntent}
+    HowToMakeDocsIntent: ${env:HowToMakeDocsIntent}
 
 resources:
   Resources:
@@ -81,7 +88,10 @@ resources:
 
 functions:
   lexIntentVerifier:
-    handler: router_controller.handlerLexIntentVerifier
+    handler: controllers/router_controller.handle_lex_intent_verifier
+  
+  introduction:
+    handler: controllers/intents/introduction_controller.handle_introduction
 
   image_to_text:
     handler: controllers/intents/image_text_extraction_controller.handle_image_to_text
