@@ -3,6 +3,7 @@ from services.rekognition_service import extract_text_from_image
 from utils.response_formatters    import prepare_response_text
 from services.translate_service   import text_translate
 from services.polly_service       import text_converter, text_converted_s3_upload
+import uuid
 
 def handle_image_to_text(event, context):
     """
@@ -33,13 +34,13 @@ def handle_image_to_text(event, context):
         
         elif text_or_audio_conditional == "audio_pt":
             audio_response = text_converter(text_from_image, "pt")
-            audio_s3_response = text_converted_s3_upload(audio_response, BUCKET_NAME, "teste")
+            audio_s3_response = text_converted_s3_upload(audio_response, BUCKET_NAME, str(uuid.uuid4()))
             return prepare_response_text(event, audio_s3_response)
         
         elif text_or_audio_conditional == "audio_fr":
             translate_response = text_translate(text_from_image, "pt", "fr")
             audio_response = text_converter(text_from_image, "fr")
-            audio_s3_response = text_converted_s3_upload(audio_response, BUCKET_NAME, "teste")
+            audio_s3_response = text_converted_s3_upload(audio_response, BUCKET_NAME, str(uuid.uuid4()))
             return prepare_response_text(event, audio_s3_response)
         else:
             return prepare_response_text(event, response)
