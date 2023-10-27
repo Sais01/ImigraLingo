@@ -35,7 +35,8 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                             Enabled = true
                         }
                         SampleUtterances = [
-                            { Utterance = "ola" }
+                            { Utterance = "ola" },
+                            { Utterance = "salut" }
                         ]
                     },
                     {
@@ -77,7 +78,8 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                             }
                         }
                         SampleUtterances = [
-                            { Utterance = "ajuda" }
+                            { Utterance = "ajuda" },
+                            { Utterance = "aide" }
                         ]
                     },
                     {
@@ -168,6 +170,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                         }
                         SampleUtterances = [
                             { Utterance = "TextAudioTranslater" },
+                            { Utterance = "AudioTextTraducteur" }
                         ]
                         Slots = [
                             {
@@ -287,6 +290,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                         }
                         SampleUtterances = [
                             { Utterance = "CepToTip" },
+                            { Utterance = "CepToTip" }
                         ]
                         Slots = [
                             {
@@ -357,6 +361,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                         }
                         SampleUtterances = [
                             { Utterance = "EmergencyContacts" },
+                            { Utterance = "ContactsUrgences" }
                         ]
                         Slots = [
                             {
@@ -404,6 +409,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                         }
                         SampleUtterances = [
                             { Utterance = "HowToMakeDocs" },
+                            { Utterance = "CommentCreerDesDocuments" }
                         ]
                     },
                     {
