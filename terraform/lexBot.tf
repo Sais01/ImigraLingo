@@ -289,7 +289,6 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                           Enabled = true
                         }
                         SampleUtterances = [
-                            { Utterance = "CepToTip" },
                             { Utterance = "CepToTip" }
                         ]
                         Slots = [
@@ -303,12 +302,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                         MessageGroupsList = [{
                                             Message = {
                                                 PlainTextMessage = {
-                                                    Value = "Por favor, envie o cep da sua localização (apenas números)."
-                                                }
-                                            },
-                                            Message = {
-                                                PlainTextMessage = {
-                                                    Value = "Caso não saiba o seu cep, você pode consultá-lo em: https://buscacepinter.correios.com.br/app/endereco/index.php."
+                                                    Value = "Por favor, envie o cep da sua localização (apenas números). \n\n Caso não saiba o seu cep, você pode consultá-lo em: https://buscacepinter.correios.com.br/app/endereco/index.php."
                                                 }
                                             }
                                         }]
