@@ -1,55 +1,60 @@
+import boto3
 import json
-from utils.twilio_send_message import twilio_send_message
-from twilio.twiml.messaging_response import MessagingResponse
-import requests
 
-from twilio.request_validator import RequestValidator
-from requests.auth import HTTPDigestAuth
-import requests
-import urllib
-import os
-
+from twilio.rest import Client
 from core.config import settings
+from utils.twilio_send_message import twilio_send_message
+from utils.twilio_get_message import twilio_get_message
 
+# Initialize the S3 client
+s3 = boto3.client('s3')
+lex_bot = boto3.client('lexv2-runtime', region_name='us-east-1')
+
+TWILIO_WHATS_FROM = settings.TWILIO_WHATS_FROM
+TWILIO_WHATS_TO = settings.TWILIO_WHATS_TO
+TWILIO_ID = settings.TWILIO_ID
 TWILIO_TOKEN = settings.TWILIO_TOKEN
+BOT_ID = settings.BOT_ID
+BOT_ALIAS = settings.BOT_ALIAS
 
 
 def new_func_twilio(event, context):
 
     try:
-        twilio_send_message("new func twilio test!!")
+        client = Client(TWILIO_ID, TWILIO_TOKEN)
 
+        twilio_send_message("Testando orquestrador", client)
+        
+        msg_received = event['body']
+        msg_data = twilio_get_message(msg_received)
+        print("ççççç")
 
-        # Get the request data
-        print(event)
-        print(event['headers'])
-        request_data = event['body']
-        request_signature = event['headers']['x-twilio-signature']
-        print(request_signature)
+        print("------------------------------------")
+        print(msg_data)
 
-        # Initialize the Twilio request validator
-        validator = RequestValidator(TWILIO_TOKEN)
+        profile_name = msg_data.get('ProfileName', [])[0]
+        print("Received message profile_name:", profile_name)
 
-        # Validate the request using the Twilio request validator
-        is_valid = validator.validate(request_signature, request_data, event['headers']['Host'])
+        whatsapp_number = msg_data.get('WaId', [])[0]
+        print("Received message whatsapp_number:", whatsapp_number)
 
-        if is_valid:
-            # The request is valid, process it
-            # Parse the incoming WhatsApp message and respond accordingly
-            # Add your logic here
-            request_body = event['body']
-            print(f"Incoming WhatsApp Message Body: {request_body}")
+        whatsapp_from = msg_data.get('From', [])[0]
+        print("Received message whatsapp_from:", whatsapp_from)
 
-            return {
-                'statusCode': 200,
-                'body': 'Webhook received and validated.'
-            }
-        else:
-            # The request is not valid; reject it
-            return {
-                'statusCode': 403,
-                'body': 'Invalid request signature.'
-            }
+        num_media = msg_data.get('NumMedia', [])[0]
+        print("Received message num_media:", num_media)
+
+        msg_body = msg_data.get('Body', [])[0]
+        print("Received message body:", msg_body)
+
+        response = lex_bot.recognize_text(
+            botId=BOT_ID,
+            botAliasId=BOT_ALIAS,
+            localeId='pt_BR',
+            sessionId='1222222222223333333333355555',  # Você pode usar uma sessão existente ou criar uma nova
+            text=msg_body
+        )
+
 
     except Exception as e:
         print(f"PRINT DE ERRO: {e}")
@@ -60,33 +65,3 @@ def new_func_twilio(event, context):
     }
 
 
-
-import os
-from twilio.request_validator import RequestValidator
-
-def webhook(event, context):
-    # Get the request data
-    request_data = event['body']
-    request_signature = event['headers']['X-Twilio-Signature']
-
-    # Initialize the Twilio request validator
-    validator = RequestValidator(os.environ['TWILIO_AUTH_TOKEN'])
-
-    # Validate the request using the Twilio request validator
-    is_valid = validator.validate(request_signature, request_data, event['headers']['Host'])
-
-    if is_valid:
-        # The request is valid, process it
-        # Parse the incoming WhatsApp message and respond accordingly
-        # Add your logic here
-
-        return {
-            'statusCode': 200,
-            'body': 'Webhook received and validated.'
-        }
-    else:
-        # The request is not valid; reject it
-        return {
-            'statusCode': 403,
-            'body': 'Invalid request signature.'
-        }
