@@ -26,18 +26,10 @@ provider:
     TWILIO_ID: ${env:TWILIO_ID}
     TWILIO_TOKEN: ${env:TWILIO_TOKEN}
     BUCKET_NAME: ${env:BUCKET_NAME}
-    START_CONVERSATION_MESSAGE: ${env:START_CONVERSATION_MESSAGE}
     BOT_ID: ${env:BOT_ID}
     BOT_ALIAS: ${env:BOT_ALIAS}
-    BOT_ARN: ${env:BOT_ARN}
 
 functions:
-  twilio2:
-    handler: controllers/new_func_twilio.new_func_twilio
-    events:
-      - httpApi:
-          path: /twilio-integration
-          method: post
   orchestrator:
     handler: controllers/orchestrator.orchestrator_handler
     events:
