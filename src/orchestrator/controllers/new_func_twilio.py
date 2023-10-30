@@ -4,7 +4,7 @@ import json
 from twilio.rest import Client
 from core.config import settings
 from utils.twilio_send_message import twilio_send_message
-from utils.twilio_get_message import twilio_get_message
+from orchestrator.utils.decode_message import twilio_get_message
 
 # Initialize the S3 client
 s3 = boto3.client('s3')

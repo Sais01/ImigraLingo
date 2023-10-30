@@ -13,6 +13,7 @@ def send_message_lex(user_input, botId, botAliasId, sessionId):
   )
 
   # Obter a resposta do bot
+  
   bot_response = response['messages'][0]['content']
   print("Bot: ", bot_response)
   return bot_response

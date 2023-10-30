@@ -1,11 +1,10 @@
 from utils.formatter import create_response_data
-import base64
-import urllib.parse
 from core.config import settings
 from services.s3 import upload_s3
 from services.lex import send_message_lex
-from utils.twilio_send_message import twilio_send_message
+from services.twilio import twilio_send_message
 from twilio.rest import Client
+from utils.decode_message import decode_message
 
 def orchestrator_handler(event, context):
   try:
@@ -20,13 +19,9 @@ def orchestrator_handler(event, context):
     BOT_ALIAS = settings.BOT_ALIAS
 
     if 'body' in event:
+      
       message = event['body']
-
-      message = base64.b64decode(message)
-      print("Received message body:", (message))
-
-      # Parse the query string into a dictionary
-      query_dict = urllib.parse.parse_qs(message.decode('utf-8'))
+      query_dict = decode_message(message)
 
       profile_name = query_dict.get('ProfileName', [])[0]
       print("Received message profile_name:", profile_name)
@@ -56,12 +51,15 @@ def orchestrator_handler(event, context):
           response_upload_s3 = upload_s3(BUCKET_NAME, access_media_url,media_content_format )
           print("response_upload_s3:", response_upload_s3)
 
+          mensagem_lex = response_upload_s3
+
       else:
         body = query_dict.get('Body', [])[0]
         print("Received message body:", body)
+        mensagem_lex = body
 
-        response_lex = send_message_lex(body, BOT_ID, BOT_ALIAS, whatsapp_number)
-        twilio_send_message(response_lex, client_twilio, whatsapp_to, whatsapp_from)
+      response_lex = send_message_lex(mensagem_lex, BOT_ID, BOT_ALIAS, whatsapp_number)
+      twilio_send_message(response_lex, client_twilio, whatsapp_to, whatsapp_from)
 
     return create_response_data(200, 'Okay!!!')
   except Exception as e:
