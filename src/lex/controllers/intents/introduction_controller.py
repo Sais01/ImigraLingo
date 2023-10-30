@@ -11,6 +11,6 @@ def handle_introduction(event, context):
   Returns:
       A response object containing the welcome message and instructions.
   """
-  response = f"Boas vindas ao ImigraLingo, bot de ajuda ao imigrante! O que deseja fazer? Caso não conheça meus comandos, digite 'ajuda'!"
+  response = f"Boas vindas ao ImigraLingo, bot de ajuda ao imigrante! O que deseja fazer? Caso não conheça meus comandos, digite 'ajuda'!\nBienvenue sur ImigraLingo, le bot d'aide pour les immigrants ! Que souhaitez-vous faire ? Si vous ne connaissez pas mes commandes, tapez 'aide' !"
   
   return prepare_response_text(event, response)
