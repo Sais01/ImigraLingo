@@ -26,7 +26,7 @@ def audio_to_text(audio_name: str, language: str, bucket_name: str) -> str:
     settings = {
       'TranscriptionJobName': job_name,
       'LanguageCode'        : language,
-      'MediaFormat'         : 'mp3', 
+      'MediaFormat'         : 'ogg', 
       'Media'               : {'MediaFileUri': audio_s3_path},
       'OutputBucketName'    : bucket_name
     }
