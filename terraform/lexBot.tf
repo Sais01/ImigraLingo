@@ -76,7 +76,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                     #     }]
                                     # }
                                     PlainTextMessage = {
-                                        Value = "Escolha uma das opções abaixo para acionar a ajuda! (Digite o número da opção)\n\n 1. Como Fazer Documentos de Imigração\n 2. Contatos de Emergência\n 3. Locais de Interesse Conforme Região\n 4. Tradutor de Texto e Áudio\n 5. Extrator de Texto em Imagens"
+                                        Value = "Escolha uma das opções abaixo para acionar a ajuda! (Digite o número da opção)\nChoisissez l'une des options ci-dessous pour demander de l'aide ! (Saisissez le numéro de l'option)\n\n 1. Como Fazer Documentos de Imigração\nComment préparer des documents d'immigration\n 2. Contatos de Emergência\nContacts d'urgence\n 3. Locais de Interesse Conforme Região\nPoints d'intérêt par région\n 4. Tradutor de Texto e Áudio\nTraducteur de texte et audio\n 5. Extrator de Texto em Imagens\nExtracteur de texte dans les images"
                                     }
                                 }
                                 }]
