@@ -49,6 +49,12 @@ functions:
       - httpApi:
           path: /flask-twilio
           method: post
+  orchestrator:
+    handler: controllers/orchestrator.orchestrator_handler
+    events:
+      - httpApi:
+          path: /orchestrator
+          method: post
           
 plugins:
   - serverless-offline
