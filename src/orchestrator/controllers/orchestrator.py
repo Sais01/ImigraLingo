@@ -3,14 +3,21 @@ import base64
 import urllib.parse
 from core.config import settings
 from services.s3 import upload_s3
+from services.lex import send_message_lex
+from utils.twilio_send_message import twilio_send_message
+from twilio.rest import Client
 
 def orchestrator_handler(event, context):
   try:
     
     TWILIO_ID = settings.TWILIO_ID
     TWILIO_TOKEN = settings.TWILIO_TOKEN
+    client_twilio = Client(TWILIO_ID, TWILIO_TOKEN)
 
     BUCKET_NAME = settings.BUCKET_NAME
+
+    BOT_ID = settings.BOT_ID
+    BOT_ALIAS = settings.BOT_ALIAS
 
     if 'body' in event:
       message = event['body']
@@ -29,6 +36,9 @@ def orchestrator_handler(event, context):
 
       whatsapp_from = query_dict.get('From', [])[0]
       print("Received message whatsapp_from:", whatsapp_from)
+
+      whatsapp_to = query_dict.get('To', [])[0]
+      print("Received message whatsapp_to:", whatsapp_to)
 
       num_media = query_dict.get('NumMedia', [])[0]
       print("Received message num_media:", num_media)
@@ -49,7 +59,10 @@ def orchestrator_handler(event, context):
       else:
         body = query_dict.get('Body', [])[0]
         print("Received message body:", body)
-    
+
+        response_lex = send_message_lex(body, BOT_ID, BOT_ALIAS, whatsapp_number)
+        twilio_send_message(response_lex, client_twilio, whatsapp_to, whatsapp_from)
+
     return create_response_data(200, 'Okay!!!')
   except Exception as e:
     print(f"An error occurred: {e}")

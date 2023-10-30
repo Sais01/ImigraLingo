@@ -10,7 +10,7 @@ s3 = boto3.client('s3')
 TWILIO_WHATS_FROM = settings.TWILIO_WHATS_FROM
 TWILIO_WHATS_TO = settings.TWILIO_WHATS_TO
 
-def twilio_send_message(text_message, client):
+def twilio_send_message(text_message, client, TWILIO_WHATS_FROM=TWILIO_WHATS_FROM, TWILIO_WHATS_TO=TWILIO_WHATS_TO):
 
     message = client.messages.create(
         from_=TWILIO_WHATS_FROM,
