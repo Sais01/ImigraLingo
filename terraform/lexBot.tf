@@ -36,7 +36,12 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                         }
                         SampleUtterances = [
                             { Utterance = "ola" },
-                            { Utterance = "salut" }
+                            { Utterance = "Bonjour"},
+                            { Utterance = "Bonsoir" },
+                            { Utterance = "He" },
+                            { Utterance = "salut" },
+                            { Utterance = "Allo" },
+                            { Utterance = "Salutations" }
                         ]
                     },
                     {
@@ -79,7 +84,12 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                         }
                         SampleUtterances = [
                             { Utterance = "ajuda" },
-                            { Utterance = "aide" }
+                            { Utterance = "aide" },
+                            { Utterance = "J'ai besoin d'assistance" },
+                            { Utterance = "Pouvez-vous m'aider, s'il vous plaît ?" },
+                            { Utterance = "Je requiers de l'aide" },
+                            { Utterance = "Je suis à la recherche d'aide" },
+                            
                         ]
                     },
                     {
