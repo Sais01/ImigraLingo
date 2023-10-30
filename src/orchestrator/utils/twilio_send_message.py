@@ -9,16 +9,8 @@ s3 = boto3.client('s3')
 
 TWILIO_WHATS_FROM = settings.TWILIO_WHATS_FROM
 TWILIO_WHATS_TO = settings.TWILIO_WHATS_TO
-TWILIO_ID = settings.TWILIO_ID
-TWILIO_TOKEN = settings.TWILIO_TOKEN
 
-def twilio_send_message(text_message):
-
-    client = Client(TWILIO_ID, TWILIO_TOKEN)
-
-    print("Client **************************************************************")
-    print(client.messages)
-    print("************************************************************** Client")
+def twilio_send_message(text_message, client):
 
     message = client.messages.create(
         from_=TWILIO_WHATS_FROM,
@@ -31,11 +23,8 @@ def twilio_send_message(text_message):
     response = MessagingResponse()
     response.message("Received your text message. Thank you!")
 
-    print("RESPONSE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    print(response)
-    print(str(response))
 
     return {
         "statusCode": 200,
-        "body": "str(response)",
+        "body": "str(response) # send message",
     }
