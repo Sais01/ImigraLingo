@@ -28,6 +28,7 @@ provider:
     TWILIO_ID: ${env:TWILIO_ID}
     TWILIO_TOKEN: ${env:TWILIO_TOKEN}
     BUCKET_NAME: ${env:BUCKET_NAME}
+    START_CONVERSATION_MESSAGE: ${env:START_CONVERSATION_MESSAGE}
 
 functions:
   twilio:
@@ -35,6 +36,18 @@ functions:
     events:
       - httpApi:
           path: /twilio
+          method: post
+  twilio2:
+    handler: controllers/new_func_twilio.new_func_twilio
+    events:
+      - httpApi:
+          path: /twilio-integration
+          method: post
+  flask:
+    handler: controllers/flask_test_handler.flask_test_handler
+    events:
+      - httpApi:
+          path: /flask-twilio
           method: post
           
 plugins:

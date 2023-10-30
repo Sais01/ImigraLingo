@@ -16,18 +16,26 @@ def twilio_send_message(text_message):
 
     client = Client(TWILIO_ID, TWILIO_TOKEN)
 
+    print("Client **************************************************************")
+    print(client.messages)
+    print("************************************************************** Client")
+
     message = client.messages.create(
         from_=TWILIO_WHATS_FROM,
         body=text_message,
         to=TWILIO_WHATS_TO,
     )
 
-    
+    print(message)
     # If it's a text message, you can respond accordingly
     response = MessagingResponse()
     response.message("Received your text message. Thank you!")
 
+    print("RESPONSE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    print(response)
+    print(str(response))
+
     return {
         "statusCode": 200,
-        "body": str(response),
+        "body": "str(response)",
     }

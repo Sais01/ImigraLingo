@@ -2,3 +2,4 @@ opencage==2.3.0
 requests==2.31.0
 boto3==1.28.64
 twilio==8.10.0
+flask==3.0.0
