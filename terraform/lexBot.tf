@@ -76,7 +76,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                     #     }]
                                     # }
                                     PlainTextMessage = {
-                                        Value = "Escolha uma das opções abaixo para acionar a ajuda! (Digite o número da opção)\nChoisissez l'une des options ci-dessous pour demander de l'aide ! (Saisissez le numéro de l'option)\n\n 1. Como Fazer Documentos de Imigração\nComment préparer des documents d'immigration\n 2. Contatos de Emergência\nContacts d'urgence\n 3. Locais de Interesse Conforme Região\nPoints d'intérêt par région\n 4. Tradutor de Texto e Áudio\nTraducteur de texte et audio\n 5. Extrator de Texto em Imagens\nExtracteur de texte dans les images"
+                                        Value = "Escolha uma das opções abaixo para acionar a ajuda! (Digite o número da opção)😃 \nChoisissez l'une des options ci-dessous pour demander de l'aide ! (Saisissez le numéro de l'option)😃\n\n  1️⃣ Como Fazer Documentos de Imigração / Comment préparer des documents d'immigration\n 2️⃣ Contatos de Emergência / Contacts d'urgence\n 3️⃣ Locais de Interesse Conforme Região / Points d'intérêt par région\n 4️⃣ Tradutor de Texto e Áudio / Traducteur de texte et audio\n 5️⃣ Extrator de Texto em Imagens / Extracteur de texte dans les images" 
                                     }
                                 }
                                 }]
@@ -131,7 +131,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                                 #     }]
                                                 # }
                                                 PlainTextMessage = {
-                                                    Value = "Você deseja receber o texto extraído da imagem ou um áudio com o texto extraído? (Digite o número da opção)\nSouhaitez-vous recevoir le texte extrait de l'image ou un audio avec le texte extrait ? (Entrez le numéro de l'option)\n\n 1. Texto em Francês\nTexte en français\n 2. Áudio em Francês\nAudio en français\n 3. Texto em Português\nTexte en portugais\n 4. Áudio em Português\nAudio en portugais"
+                                                    Value = "Você deseja receber o texto extraído da imagem ou um áudio com o texto extraído? (Digite o número da opção) / Souhaitez-vous recevoir le texte extrait de l'image ou un audio avec le texte extrait ? (Entrez le numéro de l'option)\n\n  1️⃣ Texto em Francês / Texte en français\n 2️⃣ Áudio em Francês / Audio en français\n 3️⃣ Texto em Português / Texte en portugais\n 4️⃣ Áudio em Português / Audio en portugais" 
                                                 }
                                             }
                                         }]
@@ -148,7 +148,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                         MessageGroupsList = [{
                                             Message = {
                                                 PlainTextMessage = {
-                                                    Value = "Por favor, envie a imagem contendo o texto que deseja extrair.\nVeuillez envoyer l'image contenant le texte que vous souhaitez extraire, s'il vous plaît."
+                                                    Value = "Por favor, envie a imagem contendo o texto que deseja extrair. / Veuillez envoyer l'image contenant le texte que vous souhaitez extraire, s'il vous plaît."
                                                 }
                                             }
                                         }]
@@ -165,7 +165,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                 MessageGroupsList = [{
                                     Message = {
                                         PlainTextMessage = {
-                                            Value = "Obrigado por utilizar o nosso serviço!\nMerci d'utiliser notre service !"
+                                            Value = "Obrigado por utilizar o nosso serviço! / Merci d'utiliser notre service !"
                                         }
                                     }
                                 }]
@@ -204,7 +204,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                                 #     }]
                                                 # }
                                                 PlainTextMessage = {
-                                                    Value = "Você quer traduzir um áudio ou um texto? (Digite o número da opção)\nSouhaitez-vous traduire un audio ou un texte ? (Veuillez entrer le numéro de l'option)\n\n 1. Áudio\nAudio\n 2. Texto\nTexte"
+                                                    Value = "Você quer traduzir um áudio ou um texto? (Digite o número da opção) / Souhaitez-vous traduire un audio ou un texte ? (Veuillez entrer le numéro de l'option)\n\n  1️⃣ Áudio / Audio\n 2️⃣ Texto / Texte"
                                                 }
                                             }
                                         }]
@@ -232,7 +232,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                                 #     }]
                                                 # }
                                                 PlainTextMessage = {
-                                                    Value = "Você deseja traduzir do português -> francês ou francês -> português? (Digite o número da opção)\nSouhaitez-vous traduire du portugais vers le français ou du français vers le portugais ? (Veuillez entrer le numéro de l'option)\n\n 1. Português para o francês\nPortugais en français\n 2. Francês para o português\nFrançais en portugais"
+                                                    Value = "Você deseja traduzir do português -> francês ou francês -> português? (Digite o número da opção) / Souhaitez-vous traduire du portugais vers le français ou du français vers le portugais ? (Veuillez entrer le numéro de l'option)\n\n  1️⃣ Português para o francês / Portugais en français\n 2️⃣ Francês para o português / Français en portugais"
                                                 }
                                             }
                                         }]
@@ -260,7 +260,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                                 #     }]
                                                 # }
                                                 PlainTextMessage = {
-                                                    Value = "Você deseja receber o texto ou áudio enviado como um áudio ou como texto? (Digite o número da opção)\nSouhaitez-vous recevoir le texte ou l'audio envoyé sous forme de texte ou d'audio ? (Veuillez entrer le numéro de l'option)\n\n 1. Como texto\nComme texte\n 2. Como áudio\nComme audio"
+                                                    Value = "Você deseja receber o texto ou áudio enviado como um áudio ou como texto? (Digite o número da opção) / Souhaitez-vous recevoir le texte ou l'audio envoyé sous forme de texte ou d'audio ? (Veuillez entrer le numéro de l'option)\n\n  1️⃣ Como texto / Comme texte\n 2️⃣ Como áudio / Comme audio"
                                                 }
                                             }
                                         }]
@@ -277,7 +277,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                         MessageGroupsList = [{
                                             Message = {
                                                 PlainTextMessage = {
-                                                    Value = "Envie o texto ou áudio que deseja traduzir.\nEnvoyez le texte ou l'audio que vous souhaitez traduire, s'il vous plaît"
+                                                    Value = "Envie o texto ou áudio que deseja traduzir. / Envoyez le texte ou l'audio que vous souhaitez traduire, s'il vous plaît"
                                                 }
                                             }
                                         }]
@@ -312,7 +312,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                         MessageGroupsList = [{
                                             Message = {
                                                 PlainTextMessage = {
-                                                    Value = "Por favor, envie o cep da sua localização (apenas números). \nVeuillez envoyer le code postal de votre emplacement (uniquement les chiffres).\n\n Caso não saiba o seu cep, você pode consultá-lo em: https://buscacepinter.correios.com.br/app/endereco/index.php.\nSi vous ne connaissez pas votre code postal, vous pouvez le consulter à l'adresse suivante : https://buscacepinter.correios.com.br/app/endereco/index.php."
+                                                    Value = "Por favor, envie o cep da sua localização (apenas números). / Veuillez envoyer le code postal de votre emplacement (uniquement les chiffres).\n\n Caso não saiba o seu cep, você pode consultá-lo em: https://buscacepinter.correios.com.br/app/endereco/index.php. / Si vous ne connaissez pas votre code postal, vous pouvez le consulter à l'adresse suivante : https://buscacepinter.correios.com.br/app/endereco/index.php."
                                                 }
                                             }
                                         }]
@@ -344,7 +344,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                                 #     }]
                                                 # }
                                                 PlainTextMessage = {
-                                                    Value = "Qual ponto de interesse você deseja saber a localização mais próxima? (Digite o número da opção)\nQuel point d'intérêt souhaitez-vous connaître la localisation la plus proche ? (Entrez le numéro de l'option)\n\n 1. Hospital\nHôpital\n 2. Policia\nPolice\n 3. Restaurante\nRestaurant"
+                                                    Value = "Qual ponto de interesse você deseja saber a localização mais próxima? (Digite o número da opção) / Quel point d'intérêt souhaitez-vous connaître la localisation la plus proche ? (Entrez le numéro de l'option)\n\n  1️⃣ Hospital / Hôpital\n 2️⃣ Policia / Police\n 3️⃣ Restaurante\nRestaurant"
                                                 }
                                             }
                                         }]
@@ -393,7 +393,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                                 #     }]
                                                 # }
                                                 PlainTextMessage = {
-                                                    Value = "Qual contato de emergência você deseja? (Digite o número da opção)\nQuel contact d'urgence souhaitez-vous ? (Entrez le numéro de l'option)\n\n 1. Ambulância\nAmbulance\n 2. Policia\nPolice\n 3. Bombeiros\nPompiers"
+                                                    Value = "Qual contato de emergência você deseja? (Digite o número da opção) / Quel contact d'urgence souhaitez-vous ? (Entrez le numéro de l'option)\n\n  1️⃣ Ambulância / Ambulance\n 2️⃣ Policia / Police\n 3️⃣ Bombeiros / Pompiers"
                                                 }
                                             }
                                         }]
