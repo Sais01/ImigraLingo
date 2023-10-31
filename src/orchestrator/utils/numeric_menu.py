@@ -1,6 +1,6 @@
 intents = {
     "IntroductionIntent" : {},
-    "HelpsIntent"        : {},
+    "HelpsIntent"        : ["HowToMakeDocsIntent", "EmergencyContactsIntent", "CepToTipIntent", "TextAudioTranslaterIntent", "ImageTextExtractionIntent"],
     "HowToMakeDocsIntent": {},
     "ImageTextExtractionIntent": {
         "slots": {
@@ -39,8 +39,21 @@ def numeric_menu(intent, slot, userOptionInput):
     Returns:
     str: The corresponding value from the intents dictionary.
     """
-    intentSlotsValues = intents.get(intent)
-    slotsValues       = intentSlotsValues.get("slots")
-    slot              = slotsValues.get(slot)
+    if intent == "HelpsIntent":
+        return intents.get(intent)[int(userOptionInput) - 1]
+    
+    elif intent == "IntroductionIntent":
+        return "ajuda"
+    
+    elif (intent == "CepToTipIntent" and slot == "cepFromUser") or (intent == "TextAudioTranslaterIntent" and slot == "textOrAudioReceiver"):
+        return userOptionInput
+    
+    elif slot == None:
+        return "ajuda"
+    
+    else:
+        intentSlotsValues = intents.get(intent)
+        slotsValues       = intentSlotsValues.get("slots")
+        slot              = slotsValues.get(slot)
 
-    return slot[int(userOptionInput) - 1]
+        return slot[int(userOptionInput) - 1]
