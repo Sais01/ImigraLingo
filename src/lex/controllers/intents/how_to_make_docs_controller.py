@@ -12,6 +12,6 @@ def handle_how_to_make_docs(event, context):
   - A response with a link to the necessary information for document issuance.
   """
   link     = "https://encurtador.com.br/nqswz"
-  response = f"Você pode encontrar todas as informações necessárias para a emissão de documentos no link: {link}"
+  response = f"Você pode encontrar todas as informações necessárias para a emissão de documentos no link: {link}\nVous trouverez toutes les informations nécessaires à la délivrance des documents sur le lien : {link}"
   
   return prepare_response_text(event, response)
