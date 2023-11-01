@@ -76,7 +76,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                     #     }]
                                     # }
                                     PlainTextMessage = {
-                                        Value = "Escolha uma das opções abaixo para acionar a ajuda! (Digite o número da opção)😃 \nChoisissez l'une des options ci-dessous pour demander de l'aide ! (Saisissez le numéro de l'option)😃\n\n  1️⃣ Como Fazer Documentos de Imigração / Comment préparer des documents d'immigration\n 2️⃣ Contatos de Emergência / Contacts d'urgence\n 3️⃣ Locais de Interesse Conforme Região / Points d'intérêt par région\n 4️⃣ Tradutor de Texto e Áudio / Traducteur de texte et audio\n 5️⃣ Extrator de Texto em Imagens / Extracteur de texte dans les images" 
+                                        Value = "Escolha uma das opções abaixo para acionar a ajuda! (Digite o número da opção)😃 \nChoisissez l'une des options ci-dessous pour demander de l'aide ! (Saisissez le numéro de l'option)😃\n\n 1️⃣ Como Fazer Documentos de Imigração / Comment préparer des documents d'immigration\n 2️⃣ Contatos de Emergência / Contacts d'urgence\n 3️⃣ Locais de Interesse Conforme Região / Points d'intérêt par région\n 4️⃣ Tradutor de Texto e Áudio / Traducteur de texte et audio\n 5️⃣ Extrator de Texto em Imagens / Extracteur de texte dans les images" 
                                     }
                                 }
                                 }]
@@ -131,7 +131,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                                 #     }]
                                                 # }
                                                 PlainTextMessage = {
-                                                    Value = "Você deseja receber o texto extraído da imagem ou um áudio com o texto extraído? (Digite o número da opção) / Souhaitez-vous recevoir le texte extrait de l'image ou un audio avec le texte extrait ? (Entrez le numéro de l'option)\n\n  1️⃣ Texto em Francês / Texte en français\n 2️⃣ Áudio em Francês / Audio en français\n 3️⃣ Texto em Português / Texte en portugais\n 4️⃣ Áudio em Português / Audio en portugais" 
+                                                    Value = "Você deseja receber o texto extraído da imagem ou um áudio com o texto extraído? (Digite o número da opção) / Souhaitez-vous recevoir le texte extrait de l'image ou un audio avec le texte extrait ? (Entrez le numéro de l'option)\n\n 1️⃣ Texto em Francês / Texte en français\n 2️⃣ Áudio em Francês / Audio en français\n 3️⃣ Texto em Português / Texte en portugais\n 4️⃣ Áudio em Português / Audio en portugais" 
                                                 }
                                             }
                                         }]
@@ -204,7 +204,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                                 #     }]
                                                 # }
                                                 PlainTextMessage = {
-                                                    Value = "Você quer traduzir um áudio ou um texto? (Digite o número da opção) / Souhaitez-vous traduire un audio ou un texte ? (Veuillez entrer le numéro de l'option)\n\n  1️⃣ Áudio / Audio\n 2️⃣ Texto / Texte"
+                                                    Value = "Você quer traduzir um áudio ou um texto? (Digite o número da opção) / Souhaitez-vous traduire un audio ou un texte ? (Veuillez entrer le numéro de l'option)\n\n 1️⃣ Áudio / Audio\n 2️⃣ Texto / Texte"
                                                 }
                                             }
                                         }]
@@ -232,7 +232,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                                 #     }]
                                                 # }
                                                 PlainTextMessage = {
-                                                    Value = "Você deseja traduzir do português -> francês ou francês -> português? (Digite o número da opção) / Souhaitez-vous traduire du portugais vers le français ou du français vers le portugais ? (Veuillez entrer le numéro de l'option)\n\n  1️⃣ Português para o francês / Portugais en français\n 2️⃣ Francês para o português / Français en portugais"
+                                                    Value = "Você deseja traduzir do português -> francês ou francês -> português? (Digite o número da opção) / Souhaitez-vous traduire du portugais vers le français ou du français vers le portugais ? (Veuillez entrer le numéro de l'option)\n\n 1️⃣ Português para o francês / Portugais en français\n 2️⃣ Francês para o português / Français en portugais"
                                                 }
                                             }
                                         }]
@@ -260,7 +260,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                                 #     }]
                                                 # }
                                                 PlainTextMessage = {
-                                                    Value = "Você deseja receber o texto ou áudio enviado como um áudio ou como texto? (Digite o número da opção) / Souhaitez-vous recevoir le texte ou l'audio envoyé sous forme de texte ou d'audio ? (Veuillez entrer le numéro de l'option)\n\n  1️⃣ Como texto / Comme texte\n 2️⃣ Como áudio / Comme audio"
+                                                    Value = "Você deseja receber o texto ou áudio enviado como um áudio ou como texto? (Digite o número da opção) / Souhaitez-vous recevoir le texte ou l'audio envoyé sous forme de texte ou d'audio ? (Veuillez entrer le numéro de l'option)\n\n 1️⃣ Como texto / Comme texte\n 2️⃣ Como áudio / Comme audio"
                                                 }
                                             }
                                         }]
@@ -344,7 +344,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                                 #     }]
                                                 # }
                                                 PlainTextMessage = {
-                                                    Value = "Qual ponto de interesse você deseja saber a localização mais próxima? (Digite o número da opção) / Quel point d'intérêt souhaitez-vous connaître la localisation la plus proche ? (Entrez le numéro de l'option)\n\n  1️⃣ Hospital / Hôpital\n 2️⃣ Policia / Police\n 3️⃣ Restaurante\nRestaurant"
+                                                    Value = "Qual ponto de interesse você deseja saber a localização mais próxima? (Digite o número da opção) / Quel point d'intérêt souhaitez-vous connaître la localisation la plus proche ? (Entrez le numéro de l'option)\n\n 1️⃣ Hospital / Hôpital\n 2️⃣ Policia / Police\n 3️⃣ Restaurante / Restaurant"
                                                 }
                                             }
                                         }]
@@ -393,7 +393,7 @@ resource "aws_cloudformation_stack" "finalSprintBotStackv1" {
                                                 #     }]
                                                 # }
                                                 PlainTextMessage = {
-                                                    Value = "Qual contato de emergência você deseja? (Digite o número da opção) / Quel contact d'urgence souhaitez-vous ? (Entrez le numéro de l'option)\n\n  1️⃣ Ambulância / Ambulance\n 2️⃣ Policia / Police\n 3️⃣ Bombeiros / Pompiers"
+                                                    Value = "Qual contato de emergência você deseja? (Digite o número da opção) / Quel contact d'urgence souhaitez-vous ? (Entrez le numéro de l'option)\n\n 1️⃣ Ambulância / Ambulance\n 2️⃣ Policia / Police\n 3️⃣ Bombeiros / Pompiers"
                                                 }
                                             }
                                         }]

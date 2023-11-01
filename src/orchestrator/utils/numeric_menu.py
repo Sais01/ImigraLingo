@@ -21,7 +21,7 @@ intents = {
     },
     "EmergencyContactsIntent": {
         "slots": {
-            "emergencyContact": ["ambulancia", "policia", "bombeiros"]
+            "emergencyContact": ["ambulancia", "policia", "bombeiro"]
         }
     }
 }
