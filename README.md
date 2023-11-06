@@ -80,7 +80,9 @@
   <img align="center" alt="AWS" height="28" width="42" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/1024px-Amazon_Web_Services_Logo.svg.png" />
   <img align="center" alt="S3" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/c0828e0381730befd1f7a025057c74fb-43acc0496e64afba82dbc9ab774dc622.svg" />
   <img align="center" alt="Serverless" height="28" width="42" src="https://assets-global.website-files.com/60acbb950c4d6606963e1fed/611631cd314b2abec6c29ec0_bolt.svg" />
+  <img align="center" alt="Terraform" height="28" src="https://i.pinimg.com/originals/28/ec/74/28ec7440a57536eebad2931517aa1cce.png" />
   <img align="center" alt="Lambda" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/945f3fc449518a73b9f5f32868db466c-926961f91b072604c42b7f39ce2eaf1c.svg" />
+  <img align="center" alt="API-Gateway" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/fb0cde6228b21d89ec222b45efec54e7-0856e92285f4e7ed254b2588d1fe1829.svg" />
   <img align="center" alt="Lex" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/16660b27a03cc547adc54a269bc4a69e-7d762d8739de54214018a7d757540c79.svg" />
   <img align="center" alt="Rekognition" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/b7cb336b98f3c4db02fb13d4d671df5e-37a81abbdae00bac12e1ffcd0776093b.svg" />
   <img align="center" alt="Polly" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/8ca4245f09e5a6ecf058c15cca9ac9b6-4a6ec5b037b363b8f33064d09d4f40ab.svg" />
