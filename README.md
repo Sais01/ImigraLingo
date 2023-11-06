@@ -58,11 +58,10 @@
   - [1.1 - Tecnologias Utilizadas](#ancora1-1)
 - [2 - Funcionalidades](#ancora2)
 - [3 - Desenvolvimento do Projeto](#ancora3)
-- [4 - Acesso à Aplicação e Como Utilizá-la](#ancora4)
-- [5 - Estrutura de Pastas do Projeto](#ancora5)
-- [6 - Arquitetura AWS](#ancora6)
-- [7 - Dificuldades conhecidas](#ancora7)
-- [8 - Licença](#ancora8)
+- [4 - Estrutura de Pastas do Projeto](#ancora4)
+- [5 - Arquitetura AWS](#ancora5)
+- [6 - Dificuldades conhecidas](#ancora6)
+- [7 - Licença](#ancora7)
 
 ---
 
@@ -78,7 +77,7 @@
 <div align="center">
   <img align="center" alt="Python" height="30" src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" />
   <img align="center" alt="Git" height="28" width="42" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg">
-  <img align="center" alt="AWS" height="28" width="42" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/1024px-    Amazon_Web_Services_Logo.svg.png" /
+  <img align="center" alt="AWS" height="28" width="42" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/1024px-Amazon_Web_Services_Logo.svg.png" />
   <img align="center" alt="S3" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/c0828e0381730befd1f7a025057c74fb-43acc0496e64afba82dbc9ab774dc622.svg" />
   <img align="center" alt="Serverless" height="28" width="42" src="https://assets-global.website-files.com/60acbb950c4d6606963e1fed/611631cd314b2abec6c29ec0_bolt.svg" />
   <img align="center" alt="Lambda" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/945f3fc449518a73b9f5f32868db466c-926961f91b072604c42b7f39ce2eaf1c.svg" />
@@ -87,8 +86,8 @@
   <img align="center" alt="Polly" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/8ca4245f09e5a6ecf058c15cca9ac9b6-4a6ec5b037b363b8f33064d09d4f40ab.svg" />
   <img align="center" alt="Translate" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/fc46e26a907870744758b76166150f62-76c22bfd03882310f44da5a6a9590864.svg" />
   <img align="center" alt="Transcribe" height="28" width="42" src="https://d2q66yyjeovezo.cloudfront.net/icon/762bf9a0fc087fbb4ba021a3cee6edaf-2578b25de7cbb06633f39903ccc90d08.svg" />
-  
-
+  <img align="center" alt="Twilio" height="28"  src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Twilio-logo-red.svg/2560px-Twilio-logo-red.svg.png" />
+  <img align="center" alt="Whatsapp" height="28"  src="https://www.pngkit.com/png/full/3-36604_whatsapp-png.png" />
 </div>
 
 
@@ -118,50 +117,71 @@
 
   Receba informações detalhadas sobre como realizar o processo de imigração no Brasil, com base em documentos oficiais do governo. Esteja preparado e informado durante sua jornada de imigração.
 
-<div align="center">
-  <img src="docImages/finalSprintFluxogram.png" alt="angular-logo">
-  <p> Fluxograma das intents
-</div>
-
-<!-- <a id="ancora2-1"></a>
-#### 2.1 
-
-Detalhes sobre a contrução de v1/vision e resultados aqui
-  - 
-<a id="ancora2-2"></a>
-<a id="ancora2-1"></a>
-#### 2.2 
-
-Detalhes sobre a contrução de v2/vision e resultados aqui
-  - 
-
 <a id="ancora3"></a>
-## 3. Estrutura de Diretório
 
+## 3 - Desenvolvimento do Projeto
+  
+O desenvolvimento do ImigraLingo Assist envolveu a criação e configuração de funções na plataforma AWS Lambda. Essas funções desempenham um papel crucial no processamento de imagens e áudios enviados pelo usuário, atendendo às intenções definidas no Amazon Lex. Para facilitar o gerenciamento e escalabilidade das funções Lambda, optamos por implementar o framework Serverless.
+<br>
+Para extrair texto de imagens, integramos o AWS Rekognition, capacitando nosso chatbot a identificar texto em português a ser traduzido. Além disso, utilizamos o serviço Translate da AWS para traduzir tanto texto quanto áudio, oferecendo traduções de alta qualidade em formato de áudio natural. A inclusão do AWS Transcribe nos permitiu receber áudios dos usuários e fornecer traduções com eficiência.
+<br>
+Para complementar a funcionalidade do chatbot, integramos a API do OpenCage com o OpenStreetMaps, permitindo aos usuários acessar informações sobre locais de interesse próximos com facilidade.
 
-***
+<a id="ancora4"></a>
 
---- -->
+## 4 - Estrutura de Pastas do Projeto
+- **src**
+  - **lex**
+    - **controllers**
+      - **intents**
+        - `cep_to_places_controller`
+        - `emergency_contacts_controller`
+        - `how_to_make_docs_controller`
+        - `image_text_extraction_controller`
+        - `introduction_controller`
+        - `text_audio_translater_controller`
+      - `router_controller`
+    - **core**
+      - `config`
+    - **services**
+      - `geo_service`
+      - `polly_service`
+      - `rekognition_service`
+      - `transcribe_service`
+      - `translate_service`
+    - **utils**
+  - **orchestrator**
+    - **controllers**
+      - `orchestrator`
+    - **core**
+      - `config`
+    - **services**
+      - `lex`
+      - `s3`
+      - `twilio`
+    - **utils**
+- **terraform**
 
-<a id="ancora6"></a>
+<a id="ancora5"></a>
 
-## 6. Arquitetura AWS
+## 5. Arquitetura AWS
 
-O bot terá como foco ajudar imigrantes da lingua francesa a se comunicar com a lingua portuguesa. 
 <div align="center">
   <img src="docImages/finalSprintAWSArch.png" alt="angular-logo">
   <p> Arquitetura AWS
 </div>
 
-<!-- ## 5. Desafios Enfrentados
+<a id="ancora6"></a>
 
-Desafios enfrentados durante o desenvolvimento
+## 6. Dificuldades conhecidas
+
+  **1.** Tempo de processamento do AWS Transcribe, levando em consideração o intervalo de timeout das funções Lambdas. 
 
 
---- -->
+---
 
-<a id="ancora8"></a>
+<a id="ancora7"></a>
 
-# 8 - Licença
+# 7 - Licença
 
 Este projeto está licenciado sob a Licença MIT - consulte o [Link](https://mit-license.org/) para obter mais detalhes.
