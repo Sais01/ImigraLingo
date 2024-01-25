@@ -1,13 +1,10 @@
+
 <div align="center">
-  <img src="./docImages/logo.png" alt="Logo UOL" width="120px" height="120px">
+  <h1>ImigraLingo Assist</h1>
 </div>
 
 <div align="center">
-  <h1>UOL ImigraLingo Assist</h1>
-</div>
-
-<div align="center">
-  <h2>UOL ImigraLingo Assist - O desenvolvimento do chatbot destinado a servir como um Guia Multifuncional para Imigrantes Francófonos no Brasil</h2>
+  <h2>ImigraLingo Assist - O desenvolvimento do chatbot destinado a servir como um Guia Multifuncional para Imigrantes Francófonos no Brasil</h2>
 </div>
 
 <div align="center">
